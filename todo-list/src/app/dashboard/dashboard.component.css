@@ -1,0 +1,45 @@
+.task-status-complete {
+    margin-top: 30px;
+    background-color: #f7f6fd86;
+    border-radius: 2%;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.task-status-pending {
+    margin-top: 30px;
+    background-color: #f7f6fd86;
+    border-radius: 2%;
+    padding: 10px;
+    border: 1px solid black;
+}
+.task-status-total {
+    margin-top: 30px;
+    background-color: #f7f6fd86;
+    border-radius: 2%;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+#donutChart {
+    width: 400px !important;
+    /* Adjust width as needed */
+    height: 300px !important;
+    /* Adjust height as needed */
+    margin: 0 auto;
+    /* Center the chart horizontally */
+    background-color:rgb(238, 238, 238);
+    border-radius: 2%;
+    border: 1px solid black;
+}
+
+#barChart {
+    height: 300px !important;
+    width: 400px !important;
+    /* Center the chart horizontally */
+    background-color: rgb(238, 238, 238);
+    border-radius: 2%;
+    border: 1px solid black;
+}
+
+  
