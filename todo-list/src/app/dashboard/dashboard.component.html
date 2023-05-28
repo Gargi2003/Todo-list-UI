@@ -1,10 +1,13 @@
+<app-navbar></app-navbar>
+<br><br>
+<app-tabs></app-tabs>
 <div class="container">
     <div class="row">
         <div class="col">
             <div class="task-status-complete">
                 <h4>Completed Task</h4>
                 <br>
-                <h6>100</h6>
+                <h6>{{completeCount}}</h6>
                 <p>Total Count</p>
             </div>
         </div>
@@ -12,7 +15,7 @@
             <div class="task-status-pending">
                 <h4>Pending Task</h4>
                 <br>
-                <h6>100</h6>
+                <h6>{{pendingCount}}</h6>
                 <p>Total Count</p>
             </div>
         </div>
@@ -20,7 +23,7 @@
             <div class="task-status-total">
                 <h4>Total Task</h4>
                 <br>
-                <h6>100</h6>
+                <h6>{{totalCount}}</h6>
                 <p>Total Count</p>
             </div>
         </div>
@@ -32,7 +35,23 @@
             <canvas id="donutChart" ></canvas>
         </div>
         <div class="col bar">
-            <canvas id="barChart"></canvas>
+            <div class="chart-container">
+                <canvas id="barChart"></canvas>
+                <div class="dropdown-overlay">
+                  <select class="dropdown" [(ngModel)]="selectedYear" (ngModelChange)="selectYear($event)">
+                    <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+                  </select>
+                </div>
+              </div>
+            <!-- <select [(ngModel)]="selectedYear" (change)="selectYear(selectedYear)">
+                <option value="">-- Select Year --</option>
+                <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+              </select> -->
+              
+            <!-- <canvas id="barChart"></canvas> -->
+        </div>
+        <div class="col bar">
+            <canvas id="lineChart"></canvas>
         </div>
     </div>
 </div>

@@ -1,0 +1,15 @@
+.tabs{
+    background-color: #fafafa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+}
+a{
+font-weight: bold;
+color: gray;
+}
+
+.nav-item .nav-link.active {
+    background-color: #666699;
+    color: #ffffff;
+  }
+  
