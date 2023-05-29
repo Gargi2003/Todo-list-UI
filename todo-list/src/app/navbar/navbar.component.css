@@ -1,6 +1,14 @@
  a{
-    color: white;
+    color: var(--ds-text-subtle, #344563);
 }
 .dropdown-menu a{
     color:black
+}
+.navbar-toggler-icon{
+    color: var(--ds-text-subtle, #344563);
+}
+
+.icon{
+    padding: 0px 10px 0px 10px;
+    color: var(--ds-text-subtle, #344563) !important;
 }

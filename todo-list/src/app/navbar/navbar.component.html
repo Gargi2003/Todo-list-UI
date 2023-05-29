@@ -1,5 +1,6 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #4d004d; height: 60px;">
-    <div class="container-fluid" style="background-color: #4d004d;">
+<nav class="navbar navbar-expand-lg bg-body-tertiary"
+    style="background-color: var(--ds-surface, #fff); height: 60px;  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
+    <div class="container-fluid" style="background-color: var(--ds-surface, #fff);">
         <a class="navbar-brand" href="#">TaskNinja</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,9 +17,9 @@
                         Projects
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <!-- <li><a class="dropdown-item" href="#">Action</a></li> -->
+                        <li><a class="dropdown-item" href="#">View All Projects</a></li>
+                        <li><a class="dropdown-item" href="#">Create Project</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -30,9 +31,9 @@
                         Filters
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <!-- <li><a class="dropdown-item" href="#">Action</a></li> -->
+                        <li><a class="dropdown-item" href="#">View all filters</a></li>
+                        <li><a class="dropdown-item" href="#">Advanced issue search</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -52,19 +53,21 @@
                         Dashboards
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item" href="#">View all dashboards</a></li>
+                        <li><a class="dropdown-item" href="#">Create Project</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                  <button class="btn btn-primary">Create</button>
+                    <button class="btn btn-primary">Create</button>
                 </li>
             </ul>
         </div>
         <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
+        </form>
+        <i class="fa fa-cog fa-lg icon" aria-hidden="true"></i>
+        <i class="fa fa-bell fa-lg icon" aria-hidden="true"></i>
+        <i class="fa fa-user fa-lg icon" aria-hidden="true"></i>
     </div>
 </nav>
