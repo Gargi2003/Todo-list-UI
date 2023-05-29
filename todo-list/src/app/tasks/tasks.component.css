@@ -1,0 +1,12 @@
+.task-column {
+    background-color: white;
+    padding: 10px;
+    height: 500px; /* Adjust the height value as needed */
+    /* Add any additional styles as needed */
+    border-radius: 10px;
+  }
+  p{
+    color: gray;
+    font-weight: 500;
+  }
+  
