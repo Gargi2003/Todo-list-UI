@@ -2,8 +2,24 @@
 <br><br>
 <div class="container">
   <div class="row">
-    <div class="col col-2">Sidebar</div>
+    <div class="col col-2">
+      <app-sidebar></app-sidebar>
+    </div>
     <div class="col col-8">
+      <div class="row">
+        <div class="col col-4">
+          <form class="d-flex my-2 my-lg-0">
+            <input class="form-control mr-sm-2 me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-primary me-2" type="submit">
+              <i class="fa fa-search"></i>
+            </button>
+            <button class="btn btn-outline-primary me-2" type="submit" style="border-radius: 50%;">
+              <i class="fa fa-user"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+      <br>
       <div class="row">
         <div class="col">
           <div class="task-column">
