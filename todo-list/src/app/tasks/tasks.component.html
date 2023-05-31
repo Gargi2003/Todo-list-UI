@@ -46,7 +46,7 @@
             <p>In Progress</p>
             <div class="container-fluid" style="max-height: 90%; overflow-y: scroll;">
               <div class="row" *ngFor="let item of inProgress">
-                <div class="card bg-gray card-background">
+                <div class="card bg-gray card-background " (click)="openModal(item)">
                   <div class="card-body">
                     <h5 class="card-title">{{ item.title }}</h5>
                     <p class="card-text">{{ item.description }}</p>
@@ -62,7 +62,7 @@
             <p>Done</p>
             <div class="container-fluid" style="max-height: 90%; overflow-y: scroll;">
               <div class="row" *ngFor="let item of done">
-                <div class="card bg-gray card-background">
+                <div class="card bg-gray card-background" (click)="openModal(item)">
                   <div class="card-body">
                     <h5 class="card-title">{{ item.title }}</h5>
                     <p class="card-text">{{ item.description }}</p>

@@ -19,7 +19,8 @@ export class TasksComponent {
   inProgress: any[] = [];
   done: any[] = [];
   modalOptions: NgbModalOptions = {
-    size: 'xl' // 'xl' represents extra-large size
+    size: 'xl', // 'xl' represents extra-large size
+    scrollable: true
   };
 
   constructor(

@@ -6,11 +6,32 @@
     border: none;
     color: darkgray;
 }
-
+.button-group p{
+    color: black;
+}
 .button-group .btn i {
     margin-right: 5px;
     color: black;
 }
 .breadcrumb-item{
     padding: 10px;
+}
+.time{
+    font-size: small;
+    font-weight: 300;
+}
+
+.card-background{
+    margin: 10px;
+}
+.status-btn{
+    margin: 10px;
+    background-color:rgb(211, 211, 211);
+    color: black;
+}
+.comment-group button {
+    margin-right: 10px;
+    background-color:rgb(211, 211, 211);
+    color: black;
+    border: none;
 }
