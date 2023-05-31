@@ -1,0 +1,34 @@
+<div class="container-fluid modal-container">
+    <div class="row">
+        <div class="col-8">
+            <!-- Modal content -->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Add epic</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Project Name</li>
+            </ol>
+            <h4 class="custom-modal-title">{{ task.title }}</h4>
+            <div class="button-group">
+                <button class="btn btn-secondary btn-sm btn-borderless"><i class="fa fa-paperclip" aria-hidden="true">Attach</i></button>
+                <button class="btn btn-secondary btn-sm btn-borderless"><i class="fa fa-sitemap" aria-hidden="true">Add a child issue</i></button>
+                <button class="btn btn-secondary btn-sm btn-borderless"><i class="fa fa-link" aria-hidden="true">link issue</i></button>
+            </div>
+            <p>Description</p>
+            <textarea class="form-control" placeholder="Add description">{{ task.description }}</textarea>
+        </div>
+        <div class="col-4">
+            <!-- Other content -->
+            <div class="card bg-gray card-background">
+                <div class="card-body">
+                    <p class="modal-header">Details</p>
+                    <p>Assignee: Gargi Bandyopadhyay</p>
+                    <p>Label:</p>
+                    <p>Sprint</p>
+                    <p>Story Point:</p>
+                    <p>Reporter: Gargi Bandyopadhyay</p>
+                </div>
+            </div>
+            <p>Created at {{task.created_at}}</p>
+            <p>Updated at {{task.updated_at}}</p>
+        </div>
+    </div>
+</div>

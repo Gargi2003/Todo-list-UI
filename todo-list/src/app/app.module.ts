@@ -17,6 +17,7 @@ import { SignupComponent } from './signup/signup.component';
 import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
 import { FormsModule } from '@angular/forms';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { CardDetailsComponent } from './card-details/card-details.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     TasksComponent,
     LoginComponent,
     SidebarComponent,
-    SignupComponent
+    SignupComponent,
+    CardDetailsComponent
   ],
   imports: [
     BrowserModule,

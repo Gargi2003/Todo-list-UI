@@ -1,0 +1,16 @@
+.button-group button {
+    margin-right: 10px;
+    background-color:rgb(211, 211, 211)
+}
+.button-group .btn {
+    border: none;
+    color: darkgray;
+}
+
+.button-group .btn i {
+    margin-right: 5px;
+    color: black;
+}
+.breadcrumb-item{
+    padding: 10px;
+}

@@ -1,13 +1,22 @@
 .task-column {
-    background-color: white;
+    background-color: rgb(238, 236, 236);
     padding: 10px;
-    height: 500px; /* Adjust the height value as needed */
+    height: 600px; /* Adjust the height value as needed */
     /* Add any additional styles as needed */
     border-radius: 10px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
   }
   p{
     color: gray;
     font-weight: 500;
   }
-  
+  .card-background{
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    margin: 4px;
+    transition: transform 0.3s;
+  }
+
+  .card-background:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+  }
