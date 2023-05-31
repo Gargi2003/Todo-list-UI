@@ -1,6 +1,7 @@
 <div class="container-fluid modal-container">
     <div class="row">
         <div class="col-8">
+<br>
             <!-- Modal content -->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Add epic</a></li>
@@ -17,24 +18,17 @@
             </div>
             <br>
             <h6>Description</h6>
-            <textarea class="form-control" placeholder="Add description"(click)="onTextareaClick()" (focusout)="onTextareaFocusOut()" [(ngModel)]="task.description"></textarea>
+            <textarea class="form-control" placeholder="Add description" (click)="onTextareaClick()"
+                (focusout)="onTextareaFocusOut()" [(ngModel)]="task.description"></textarea>
             <div class="d-flex" *ngIf="showButtons">
-                <button class="btn btn-primary btn-sm btn-borderless"(click)="onSaveClick()" style="margin: 10px 10px 0 0">Save</button>
-                <button class="btn btn-secondary btn-sm btn-borderless" (click)="onCancelClick()" style="margin: 10px 10px 0 0">Cancel</button>
+                <button class="btn btn-primary btn-sm btn-borderless" (click)="onSaveClick()"
+                    style="margin: 10px 10px 0 0">Save</button>
+                <button class="btn btn-secondary btn-sm btn-borderless" (click)="onCancelClick()"
+                    style="margin: 10px 10px 0 0">Cancel</button>
             </div>
             <br>
             <br>
             <h6>Activity</h6>
-            <!-- <div class="d-flex">
-                <p style="margin-right: 10px;">Show: </p>
-                <div class="comment-group ">
-                    <button class="btn btn-secondary btn-sm btn-borderless">All</button>
-                    <button class="btn btn-secondary btn-sm btn-borderless">Comments
-                            a child issue</button>
-                    <button class="btn btn-secondary btn-sm btn-borderless">History</button>
-                </div>
-            </div> -->
-
             <div class="d-flex">
                 <p style="margin-right: 10px;">Show: </p>
                 <div class="comment-group">
@@ -48,7 +42,7 @@
                 </div>
             </div>
             <textarea class="form-control" placeholder="Add a comment" (focus)="onTextareaFocusComment()"
-            (blur)="onTextareaBlurComment()"></textarea>
+                (blur)="onTextareaBlurComment()"></textarea>
             <div class="d-flex" *ngIf="commentTextareaFocused">
                 <button class="btn btn-primary btn-sm btn-borderless" style="margin: 10px 10px 0 0">Save</button>
                 <button class="btn btn-secondary btn-sm btn-borderless" style="margin: 10px 10px 0 0">Cancel</button>
@@ -56,7 +50,11 @@
             <br><br>
         </div>
         <div class="col-4">
-            <br><br><br>
+            <br>
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-close" (click)="onCloseClick()"></button>
+              </div>
+            <br><br>
             <div class="dropdown">
                 <button class="btn status-btn btn-secondary btn-sm dropdown-toggle btn-borderless" type="button"
                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

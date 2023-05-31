@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import * as moment from 'moment';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-card-details',
   templateUrl: './card-details.component.html',
@@ -10,10 +12,13 @@ export class CardDetailsComponent {
   timeDifference:any;
   
 
-  constructor() { }
+  constructor(private modalService: NgbModal) { }
   @Input() task: any;
 
-
+  onCloseClick() {
+    // Close the modal
+    this.modalService.dismissAll();
+  }
 
    getRelativeTime(timestamp:string) {
     
