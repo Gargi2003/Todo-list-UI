@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 // import * as moment from 'moment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-card-details',
@@ -9,27 +11,52 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class CardDetailsComponent {
   selectedTask: any;
-  timeDifference:any;
-  
+  timeDifference: any;
+  selectedStatus: string = '';
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private router: Router,private modalService: NgbModal,private http: HttpClient) { }
   @Input() task: any;
 
-  onCloseClick() {
-    // Close the modal
-    this.modalService.dismissAll();
+  ngOnInit() {
+    this.selectedStatus = this.task.status;
+    console.log("status", this.selectedStatus)
   }
 
-   getRelativeTime(timestamp:string) {
-    
+  onCloseClick() {
+    this.modalService.dismissAll();
+  }
+  isDropdownOpen = false;
+
+  toggleDropdown() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      }),
+    };
+    this.http.delete('http://localhost:8081/tasks/delete?id='+this.task.id,httpOptions).subscribe((response:any) => {
+      console.log(response)
+      if (response.includes("Deleted")) {
+        console.log("entered success")
+        this.modalService.dismissAll();
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false; // Reload the route
+        this.router.onSameUrlNavigation = 'reload'; // Reload the route
+        this.router.navigate(['/tasks']);
+      }
+    })
+  }
+
+  onDeleteClick() { }
+  getRelativeTime(timestamp: string) {
+
     const currentDate = new Date();
     const targetDate = new Date(timestamp);
-    if(currentDate.getTime()> targetDate.getTime()){
+    if (currentDate.getTime() > targetDate.getTime()) {
       this.timeDifference = currentDate.getTime() - targetDate.getTime();
-    }else{
-      this.timeDifference = targetDate.getTime()-currentDate.getTime() ;
+    } else {
+      this.timeDifference = targetDate.getTime() - currentDate.getTime();
     }
-    
+
     const hoursAgo = Math.floor(this.timeDifference / (1000 * 60 * 60));
     return hoursAgo + ' hours ago';
   }
@@ -39,10 +66,8 @@ export class CardDetailsComponent {
     this.selectedButton = button;
   }
 
-  // textareaFocused: boolean = false;
-  // saveClicked: boolean = false;
 
-  commentTextareaFocused:boolean=false
+  commentTextareaFocused: boolean = false
 
   showButtons: boolean = false;
 
@@ -53,33 +78,13 @@ export class CardDetailsComponent {
     this.showButtons = false;
   }
   onTextareaFocusOut() {
-    // Delay hiding the buttons to allow clicking on the buttons without triggering focusout
     setTimeout(() => {
       this.showButtons = false;
     }, 200);
   }
   onSaveClick() {
-    this.showButtons=true;
-    // Perform the save operation here
+    this.showButtons = true;
   }
-  // onTextareaFocus() {
-  //   this.textareaFocused = true;
-  // }
-
-  // onTextareaBlur() {
-  //   if (!this.saveClicked) {
-  //     this.textareaFocused = false;
-  //   }
-  // }
-
-  // onTextareaClick() {
-  //   this.saveClicked = false;
-  // }
-
-  // onSaveClick() {
-  //   this.saveClicked = true;
-  // }
-
 
   onTextareaFocusComment() {
     this.commentTextareaFocused = true;
@@ -90,22 +95,6 @@ export class CardDetailsComponent {
   }
 
 
-  // getRelativeTime(timestamp: string): string {
-  //   const now = moment();
-  // const time = moment(timestamp);
 
-  // const duration = moment.duration(now.diff(time));
-  // const minutes = duration.asMinutes();
-  // const seconds = duration.asSeconds();
-
-  // if (seconds < 60) {
-  //   return `${Math.floor(seconds)} seconds ago`;
-  // } else if (minutes < 60) {
-  //   return `${Math.floor(minutes)} minutes ago`;
-  // } else {
-  //   return time.fromNow();
-  // }
-    
-  // }
 
 }

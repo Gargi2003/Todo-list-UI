@@ -1,7 +1,7 @@
 <div class="container-fluid modal-container">
     <div class="row">
         <div class="col-8">
-<br>
+            <br>
             <!-- Modal content -->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Add epic</a></li>
@@ -53,28 +53,34 @@
             <br>
             <div class="d-flex justify-content-end">
                 <button class="btn btn-close" (click)="onCloseClick()"></button>
-              </div>
-            <br><br>
-            <div class="dropdown">
-                <button class="btn status-btn btn-secondary btn-sm dropdown-toggle btn-borderless" type="button"
-                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{task.status}}
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">In Progress</a>
-                    <a class="dropdown-item" href="#">Done</a>
-                </div>
             </div>
+            <br><br>
+            <div class="d-flex">
+                <div class="form-group me-2">
+                    <select class="form-control" id="statusDropdown" [(ngModel)]="selectedStatus" >
+                        <option value="To Do">To Do</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Done">Done</option>
+                    </select>
+                </div>
+                  
+                <button class="btn btn-secondary btn-sm" (click)="toggleDropdown()">
+                    Delete
+                </button>
+                  
+                  
+            </div>
+            
             <!-- Other content -->
 
             <div class="card bg-gray card-background">
                 <div class="card-body">
                     <p class="modal-header">Details</p>
-                    <p>Assignee: Gargi Bandyopadhyay</p>
+                    <p>Assignee: {{task.assignee}}</p>
                     <p>Label:</p>
-                    <p>Sprint</p>
-                    <p>Story Point:</p>
-                    <p>Reporter: Gargi Bandyopadhyay</p>
+                    <p>Sprint: {{task.sprint}}</p>
+                    <p>Story Point: {{task.points}}</p>
+                    <p>Reporter: {{task.reporter}}</p>
                 </div>
             </div>
 

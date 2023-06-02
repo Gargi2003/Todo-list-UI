@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -41,7 +42,9 @@ import { CreateTasksComponent } from './create-tasks/create-tasks.component';
     MatSidenavModule,
     MatListModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-US'}],
   bootstrap: [AppComponent]
