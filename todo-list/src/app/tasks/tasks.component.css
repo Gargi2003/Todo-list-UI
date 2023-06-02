@@ -1,8 +1,7 @@
 .task-column {
     background-color: rgb(238, 236, 236);
     padding: 10px;
-    height: 600px; /* Adjust the height value as needed */
-    /* Add any additional styles as needed */
+    height: 600px; 
     border-radius: 10px;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
   }
@@ -19,4 +18,7 @@
   .card-background:hover{
     cursor: pointer;
     transform: scale(1.1);
+  }
+  .breadcrumb{
+    margin-top: 10px;
   }

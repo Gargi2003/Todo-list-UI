@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import * as moment from 'moment';
+// import * as moment from 'moment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

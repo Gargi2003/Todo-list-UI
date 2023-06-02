@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { CreateTasksComponent } from '../create-tasks/create-tasks.component';
 
 @Component({
   selector: 'app-navbar',
@@ -6,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-
+  constructor(
+    private modalService: NgbModal
+  ) { }
+  modalOptions: NgbModalOptions = {
+    size: 'xl', // 'xl' represents extra-large size
+    scrollable: true
+  };
+  openModal() {
+    // console.log(task);
+    const modalRef = this.modalService.open(CreateTasksComponent, this.modalOptions);
+  }
 }

@@ -1,0 +1,89 @@
+<div class="modal-header">
+  <h5 class="modal-title">Create Issue</h5>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+    <label for="projectDropdown">Project</label>
+    <select class="form-control" id="projectDropdown" [(ngModel)]="selectedProject">
+      <option value="Dummy">Dummy</option>
+      <!-- Add more project options here -->
+    </select>
+  </div>
+  <br>
+  <div class="form-group">
+    <label for="issueTypeDropdown">Issue Type</label>
+    <select class="form-control" id="issueTypeDropdown" [(ngModel)]="selectedIssueType">
+      <option value="task">Task</option>
+      <option value="bug">Bug</option>
+      <option value="epic">Epic</option>
+      <option value="story">Story</option>
+      <!-- Add more issue type options here -->
+    </select>
+  </div>
+  <br>
+  <!-- Add the grayish line here -->
+  <hr class="grayish-line">
+  <br>
+  <div class="form-group">
+    <label for="statusDropdown">Status</label>
+    <select class="form-control" id="statusDropdown" [(ngModel)]="selectedStatus">
+      <option value="todo">To Do</option>
+      <option value="inProgress">In Progress</option>
+      <option value="done">Done</option>
+      <!-- Add more status options here -->
+    </select>
+  </div>
+  <br>
+  <div class="form-group">
+    <label for="summary">Summary</label>
+    <input type="text" class="form-control" id="summary" [(ngModel)]="summary">
+  </div>
+  <br>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea class="form-control" id="description" [(ngModel)]="description"></textarea>
+  </div>
+  <br>
+  <div class="form-group">
+    <label>Assignee</label>
+    <div class="assignee-search-box">
+      <input type="text" class="form-control" [(ngModel)]="assigneeSearchTerm" placeholder="Search Assignee" (input)="searchAssignee()">
+      <!-- Implement search functionality for assignee -->
+      <div class="search-results">
+        <ul>
+          <li *ngFor="let result of assigneeResults" (click)="selectAssignee(result)">{{ result }}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="selected-assignee">{{ selectedAssignee }}</div>
+  </div>
+  <br>
+  <div class="form-group">
+    <label for="sprint">Sprint</label>
+    <input type="text" class="form-control" id="sprint" [(ngModel)]="sprint">
+  </div>
+  <br>
+  <div class="form-group">
+    <label for="storyPoints">Story Points Estimate</label>
+    <input type="number" class="form-control" id="storyPoints" [(ngModel)]="storyPoints">
+  </div>
+  <br>
+  <div class="form-group">
+    <label>Reporter</label>
+    <div class="reporter-search-box">
+      <input type="text" class="form-control" [(ngModel)]="reporterSearchTerm" placeholder="Search Reporter" (input)="searchReporter()">
+      <!-- Implement search functionality for reporter -->
+      <div class="search-results">
+        <ul>
+          <li *ngFor="let result of reporterResults" (click)="selectReporter(result)">{{ result }}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="selected-reporter">{{ selectedReporter }}</div>
+  </div>
+  <br>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+  <button type="button" class="btn btn-primary"(click)="createTask(selectedProject,selectedIssueType,selectedStatus,summary,description,assigneeSearchTerm,sprint,storyPoints,reporterSearchTerm)">Create</button>
+</div>

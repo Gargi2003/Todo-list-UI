@@ -78,7 +78,7 @@ export class DashboardComponent {
           }
           this.createdByMonth[i] = this.tasks[i].created_at;
 
-          // Logic for donut chart
+          // Logic for complete,pending,total
           if (this.tasks[i].completed) this.completeCount++;
           else this.pendingCount++;
         }

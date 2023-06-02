@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { CardDetailsComponent } from '../card-details/card-details.component';
 
@@ -25,7 +25,7 @@ export class TasksComponent {
 
   constructor(
     private modalService: NgbModal,
-    private router: Router,
+    // private router: Router,
     private http: HttpClient
   ) {}
 
@@ -48,11 +48,11 @@ export class TasksComponent {
 
       this.tasks.forEach((task: any) => {
         this.status = task.status;
-        if (this.status.includes('to do')) {
+        if (this.status.includes('To Do')||this.status.includes('todo')) {
           this.todo.push(task);
-        } else if (this.status.includes('in progress')) {
+        } else if (this.status.includes('In Progress')||this.status.includes('inProgress')) {
           this.inProgress.push(task);
-        } else if (this.status.includes('done')) {
+        } else if (this.status.includes('Done')||this.status.includes('done')) {
           this.done.push(task);
         }
       });
