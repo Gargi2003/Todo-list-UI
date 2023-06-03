@@ -30,7 +30,7 @@
           <!-- <div class="task-column"> -->
           <p>To Do</p>
           <div class="container-fluid" style="max-height: 90%; overflow-y: scroll;">
-            <div class="row" *ngFor="let item of todo">
+            <div class="row rows" *ngFor="let item of todo" >
               <div class="card bg-gray card-background" (click)="openModal(item)">
                 <div class="card-body">
                   <h5 class="card-title">{{ item.title }}</h5>
@@ -45,7 +45,7 @@
           <div class="task-column">
             <p>In Progress</p>
             <div class="container-fluid" style="max-height: 90%; overflow-y: scroll;">
-              <div class="row" *ngFor="let item of inProgress">
+              <div class="row rows" *ngFor="let item of inProgress">
                 <div class="card bg-gray card-background " (click)="openModal(item)">
                   <div class="card-body">
                     <h5 class="card-title">{{ item.title }}</h5>
@@ -61,7 +61,7 @@
           <div class="task-column">
             <p>Done</p>
             <div class="container-fluid" style="max-height: 90%; overflow-y: scroll;">
-              <div class="row" *ngFor="let item of done">
+              <div class="row rows" *ngFor="let item of done">
                 <div class="card bg-gray card-background" (click)="openModal(item)">
                   <div class="card-body">
                     <h5 class="card-title">{{ item.title }}</h5>

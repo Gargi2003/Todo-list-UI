@@ -4,12 +4,27 @@
   height: 600px; 
   border-radius: 10px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+
+}
+.rows{
+  margin: 10px;
 }
 
+.card-background {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  margin: 4px;
+  transition: transform 0.3s;
+}
+
+.card-background:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
 .task-column > div.container-fluid {
   max-height: calc(90% - 20px);
   overflow-y: auto;
   overflow-x: hidden;
+  cursor: pointer;
 }
 
 .task-column > div.container-fluid::-webkit-scrollbar {

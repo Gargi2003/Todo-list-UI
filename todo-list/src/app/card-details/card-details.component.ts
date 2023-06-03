@@ -13,31 +13,32 @@ export class CardDetailsComponent {
   selectedTask: any;
   timeDifference: any;
   selectedStatus: string = '';
+  result:any
 
   constructor(private router: Router,private modalService: NgbModal,private http: HttpClient) { }
   @Input() task: any;
 
   ngOnInit() {
     this.selectedStatus = this.task.status;
-    console.log("status", this.selectedStatus)
+    // console.log("status", this.selectedStatus)
   }
 
   onCloseClick() {
     this.modalService.dismissAll();
   }
   isDropdownOpen = false;
-
-  toggleDropdown() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      }),
-    };
-    this.http.delete('http://localhost:8081/tasks/delete?id='+this.task.id,httpOptions).subscribe((response:any) => {
-      console.log(response)
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    }),
+  };
+  //delete task
+  onClickDelete() {
+    this.http.delete('http://localhost:8081/tasks/delete?id='+this.task.id,this.httpOptions).subscribe((response:any) => {
+      // console.log(response)
       if (response.includes("Deleted")) {
-        console.log("entered success")
+        // console.log("entered success")
         this.modalService.dismissAll();
         this.router.routeReuseStrategy.shouldReuseRoute = () => false; // Reload the route
         this.router.onSameUrlNavigation = 'reload'; // Reload the route
@@ -45,8 +46,58 @@ export class CardDetailsComponent {
       }
     })
   }
-
-  onDeleteClick() { }
+  //update description
+  onSaveClickDescription() {
+    const body={
+      description: this.task.description
+    }
+    this.http.put('http://localhost:8081/tasks/edit?id='+this.task.id,body,this.httpOptions).subscribe((response:any)=>{
+      if(response.includes("successfully")){
+        //add toaster
+      }
+    })
+  }
+  //update comment
+  onSaveClickComment(){
+    const body={
+      comments: this.task.comments
+    }
+    this.http.put('http://localhost:8081/tasks/edit?id='+this.task.id,body,this.httpOptions).subscribe((response:any)=>{
+      if(response.includes("successfully")){
+        //add toaster
+        console.log("success")
+      }
+    })
+  }
+  //update status
+  updateStatus(){
+    console.log(this.selectedStatus)
+    const body = {
+      status: this.selectedStatus
+    };
+    this.http.put('http://localhost:8081/tasks/edit?id='+this.task.id,body,this.httpOptions).subscribe((response:any)=>{
+      if(response.includes("successfully")){
+        //add toaster
+        console.log("success")
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false; // Reload the route
+        this.router.onSameUrlNavigation = 'reload'; // Reload the route
+        this.router.navigate(['/tasks']);
+      }
+    })
+  }
+  //update assignee
+  updateAssignee() {
+    const body = {
+      assignee: this.task.assignee
+    };
+  
+    this.http.put('http://localhost:8081/tasks/update-assignee?id=' + this.task.id, body, this.httpOptions)
+      .subscribe(response => {
+        console.log(response);
+        // Handle the response and update the UI if needed
+      });
+  }
+  
   getRelativeTime(timestamp: string) {
 
     const currentDate = new Date();
@@ -67,32 +118,9 @@ export class CardDetailsComponent {
   }
 
 
-  commentTextareaFocused: boolean = false
-
-  showButtons: boolean = false;
-
-  onTextareaClick() {
-    this.showButtons = true;
-  }
   onCancelClick() {
-    this.showButtons = false;
-  }
-  onTextareaFocusOut() {
-    setTimeout(() => {
-      this.showButtons = false;
-    }, 200);
-  }
-  onSaveClick() {
-    this.showButtons = true;
   }
 
-  onTextareaFocusComment() {
-    this.commentTextareaFocused = true;
-  }
-
-  onTextareaBlurComment() {
-    this.commentTextareaFocused = false;
-  }
 
 
 

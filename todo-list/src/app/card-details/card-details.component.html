@@ -18,10 +18,10 @@
             </div>
             <br>
             <h6>Description</h6>
-            <textarea class="form-control" placeholder="Add description" (click)="onTextareaClick()"
-                (focusout)="onTextareaFocusOut()" [(ngModel)]="task.description"></textarea>
-            <div class="d-flex" *ngIf="showButtons">
-                <button class="btn btn-primary btn-sm btn-borderless" (click)="onSaveClick()"
+            <textarea class="form-control" placeholder="Add description" [ngModel]="task.description"
+                (ngModelChange)="task.description = $event"></textarea>
+            <div class="d-flex">
+                <button class="btn btn-primary btn-sm btn-borderless" (click)="onSaveClickDescription()"
                     style="margin: 10px 10px 0 0">Save</button>
                 <button class="btn btn-secondary btn-sm btn-borderless" (click)="onCancelClick()"
                     style="margin: 10px 10px 0 0">Cancel</button>
@@ -41,10 +41,11 @@
                         [class.active]="selectedButton === 'history'" (click)="selectButton('history')">History</button>
                 </div>
             </div>
-            <textarea class="form-control" placeholder="Add a comment" (focus)="onTextareaFocusComment()"
-                (blur)="onTextareaBlurComment()"></textarea>
-            <div class="d-flex" *ngIf="commentTextareaFocused">
-                <button class="btn btn-primary btn-sm btn-borderless" style="margin: 10px 10px 0 0">Save</button>
+            <textarea class="form-control" placeholder="Add a comment" [ngModel]="task.comments"
+            (ngModelChange)="task.comments = $event"></textarea>
+            <div class="d-flex" >
+                <button class="btn btn-primary btn-sm btn-borderless" style="margin: 10px 10px 0 0"
+                    (click)="onSaveClickComment()">Save</button>
                 <button class="btn btn-secondary btn-sm btn-borderless" style="margin: 10px 10px 0 0">Cancel</button>
             </div>
             <br><br>
@@ -57,32 +58,39 @@
             <br><br>
             <div class="d-flex">
                 <div class="form-group me-2">
-                    <select class="form-control" id="statusDropdown" [(ngModel)]="selectedStatus" >
+                    <select class="form-control" id="statusDropdown" [(ngModel)]="selectedStatus" (change)="updateStatus()">
                         <option value="To Do">To Do</option>
                         <option value="In Progress">In Progress</option>
                         <option value="Done">Done</option>
                     </select>
                 </div>
-                  
-                <button class="btn btn-secondary btn-sm" (click)="toggleDropdown()">
+
+                <button class="btn btn-secondary btn-sm" (click)="onClickDelete()">
                     Delete
                 </button>
-                  
-                  
+
+
             </div>
-            
+
             <!-- Other content -->
 
             <div class="card bg-gray card-background">
                 <div class="card-body">
-                    <p class="modal-header">Details</p>
-                    <p>Assignee: {{task.assignee}}</p>
-                    <p>Label:</p>
-                    <p>Sprint: {{task.sprint}}</p>
-                    <p>Story Point: {{task.points}}</p>
-                    <p>Reporter: {{task.reporter}}</p>
+                  <p class="modal-header">Details</p>
+                 
+                  <div class="d-flex">
+                    <p>Assignee:</p>
+                    <input type="text" [(ngModel)]="this.task.assignee" style="height: 30px;width: 160px;">
+                    <i class="fa fa-check fa-lg tick-icon" (click)="updateAssignee()"></i>
+                  </div>
+                 
+                  <p>Label:</p>
+                  <p>Sprint: {{task.sprint}}</p>
+                  <p>Story Point: {{task.points}}</p>
+                  <p>Reporter: {{task.reporter}}</p>
                 </div>
-            </div>
+              </div>
+              
 
             <div class="time d-flex">
                 <p style="margin-right: 10px;">Created at {{ getRelativeTime(task.created_at) }}</p>
