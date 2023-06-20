@@ -36,7 +36,7 @@
                         </button>
                         <mat-menu #projectMenu="matMenu">
                             <button mat-menu-item>Project Settings</button>
-                            <button mat-menu-item>Move to Trash</button>
+                            <button mat-menu-item (click)="deleteProject(item.id)">Move to Trash</button>
                         </mat-menu>
                     </div>
                 </td>

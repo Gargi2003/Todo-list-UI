@@ -1,25 +1,103 @@
 <app-navbar></app-navbar>
-
+<br><br><br>
 <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col">
-            <h2>Add project details</h2>
-            <p>Explore what's possible when you collaborate with your team. Edit project details anytime in project
-                settings.</p>
+            <h3>Add project details</h3>
+            <p style="color:gray; font-size: 13px;">Explore what's possible when you collaborate with your team. Edit
+                project
+                <br>
+                details anytime in project
+                settings.
+            </p>
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="sprint">
+                <input type="text" class="form-control" id="name" style="width:450px" [(ngModel)]="name"
+                    (ngModelChange)="onNameChange()">
             </div>
+            <p style="color:gray; font-size: 13px;">
+                <strong>Access</strong> Anyone with access to estoulph123 can access and administer <br>
+                this project. Upgrade your plan to
+                customize project permissions.
+            </p>
+
+            <div class="form-group">
+                <label for="name">Leader</label>
+                <input type="text" class="form-control" id="name" style="width:400px" [(ngModel)]="leader">
+            </div>
+            <br>
             <div class="form-group">
                 <label for="key">Key</label>
-                <input type="text" class="form-control" id="sprint">
+
+                <input type="text" class="form-control" id="key" style="width:200px" [(ngModel)]="key">
             </div>
-            <div class="info">
-                
+            <br>
+            <div class="info"
+                style="background-color:var(--ds-background-neutral,#edeff1);;width:450px;border-radius: 8px;padding:10px">
+
+                <label for="">
+                    <input type="checkbox">
+                    <strong style="color:gray;font-size:13px;margin-left: 8px;">Connect repositories, documents, and
+                        more</strong>
+                </label>
+
+                <p style="font-size:12px">
+                    Sync your team's work from other tools with this project for better visibility, access, and
+                    automation.
+                </p>
+
             </div>
         </div>
         <div class="col">
-
+            <div class="container" style="background-color: var(--ds-background-neutral,#f5f5f5);padding:30px">
+                <div class="row">
+                    <div class="d-flex justify-content-between" style="margin-bottom: 10px;">
+                        <span><strong style="font-size: 14px; color: gray;"> Template</strong></span>
+                        <span><strong style="font-size: 14px; color: gray;">Change Template</strong> </span>
+                    </div>
+                    <div class="card" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); width: 38rem;">
+                        <img class="card-img-left" src="../../assets/kanban.jpg" style="position: relative;
+                        left: -12px;" width="100px" height="110px" alt="Card image cap">
+                        <div class="card-body">
+                            <p class="card-text"><strong
+                                    style="font-size:13.5px;color: rgb(139, 138, 138);">Kanban</strong>
+                                <br>
+                                Visualize and advance your project forward using issues on a powerful board.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="d-flex justify-content-between" style="margin-bottom: 10px;">
+                        <span><strong style="font-size: 14px; color: gray;"> Template</strong></span>
+                        <span><strong style="font-size: 14px; color: gray;">Change Template</strong> </span>
+                    </div>
+                    <div class="card" style=" box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); width: 38rem;">
+                        <img class="card-img-left" style="position: relative;
+                        left: -12px;" src="../../assets/team-managed.jpg" width="100px" height="110px"
+                            alt="Card image cap">
+                        <div class="card-body">
+                            <p class="card-text"> <strong style="font-size:13.5px;color: rgb(119, 0, 166);">
+                                    Team-managed</strong>
+                                <br>
+                                Control your own working processes and practices in a self-contained space.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <hr style="border-top: 1px solid gray; margin-top: 20px;">
+        <div class="container">
+            <div class="row justify-content-end">
+                <div class="col">
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-secondary me-2">Cancel</button>
+                        <button class="btn btn-primary" (click)="createProject()">Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-</div>

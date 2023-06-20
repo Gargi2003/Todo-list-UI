@@ -1,6 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
-// import { PagingConfig } from './_models/paging-config.model';
+import { Router } from '@angular/router';
 interface PagingConfig {
   currentPage: number;
   itemsPerPage: number;
@@ -13,7 +13,7 @@ interface PagingConfig {
 })
 
 export class ProjectViewAllComponent implements OnInit{
-  constructor(private http: HttpClient){
+  constructor(private router: Router,private http: HttpClient){
     this.pagingConfig = {
       itemsPerPage: this.itemsPerPage,
       currentPage: this.currentPage,
@@ -60,18 +60,27 @@ export class ProjectViewAllComponent implements OnInit{
   }
   searchProjects() {
     if (this.searchKeyword.trim() !== '') {
-      console.log("projects",this.project)
       this.filteredProjects = this.project.filter(
         (item: any) =>
           item.name.toLowerCase().includes(this.searchKeyword.toLowerCase())
       );
-      console.log("filtered",this.filteredProjects)
-      console.log(this.searchKeyword)
+ 
     } else {
       this.filteredProjects = this.project;
     }
   }
   clearSearch(){
     this.searchKeyword=''
+  }
+  deleteProject(id:any) {
+    console.log("id",id)
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    console.log(id)
+    this.http.delete('http://localhost:8081/projects/delete?id='+id , { headers }).subscribe((res: any) => {
+      if (res.includes("Deleted")) {
+        this.router.navigate(['/view-all-project']);
+        location.reload();
+      }
+    })
   }
 }
