@@ -91,13 +91,46 @@ export class CardDetailsComponent {
       assignee: this.task.assignee
     };
   
-    this.http.put('http://localhost:8081/tasks/update-assignee?id=' + this.task.id, body, this.httpOptions)
-      .subscribe(response => {
-        console.log(response);
+    this.http.put('http://localhost:8081/tasks/edit?id=' + this.task.id, body, this.httpOptions)
+      .subscribe((response:any) => {
+        
+        if(response.includes("successfully")){
+          console.log("success");
+        }
         // Handle the response and update the UI if needed
       });
   }
   
+   //update reporter
+   updateReporter() {
+    const body = {
+      reporter: this.task.reporter
+    };
+  
+    this.http.put('http://localhost:8081/tasks/edit?id=' + this.task.id, body, this.httpOptions)
+      .subscribe((response:any) => {
+        
+        if(response.includes("successfully")){
+          console.log("success");
+        }
+        // Handle the response and update the UI if needed
+      });
+  }
+  //update points
+  updatePoints(){
+    const body = {
+      points: this.task.points
+    };
+  
+    this.http.put('http://localhost:8081/tasks/edit?id=' + this.task.id, body, this.httpOptions)
+      .subscribe((response:any) => {
+        
+        if(response.includes("successfully")){
+          console.log("success");
+        }
+        // Handle the response and update the UI if needed
+      });
+  }
   getRelativeTime(timestamp: string) {
 
     const currentDate = new Date();

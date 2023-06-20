@@ -1,0 +1,50 @@
+<app-navbar></app-navbar>
+<div class="container" style="margin-top: 20px;">
+    <h5>Projects </h5>
+    <form class="d-flex my-2 my-lg-0">
+        <input class="form-control mr-sm-2 me-2" type="search" placeholder="Search" aria-label="Search"
+            style="width: 300px;" [(ngModel)]="searchKeyword" name="searchKeyword" (input)="searchProjects()">
+            <!-- <div class="input-group-append"> -->
+                <span  style="position: relative; left: -35px;top:5px" *ngIf="!searchKeyword" (click)="clearSearch()">
+                  <i class="fa fa-search"></i>
+                </span>
+              <!-- </div> -->
+        <button class="btn btn-primary ms-auto" [routerLink]="['/create-project']">Create Project</button>
+    </form>
+</div>
+<div class="container table-container" style="margin-top: 20px;">
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th scope="col"  style="width: 30px;"><i class="fa fa-star" aria-hidden="true"></i></th>
+                <th scope="col" style="width: 200px;">Name</th>
+                <th scope="col" style="width: 100px;">Key</th>
+                <th scope="col" style="width: 100px;">Lead</th>
+                <th scope="col" style="width: 100px;"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of filteredProjects | paginate : pagingConfig; let i = index">
+                <th scope="row"></th>
+                <td><img src="https://i.postimg.cc/tRVRnW40/people-2.png" height="20px" width="20px">{{item.name}}</td>
+                <td>{{item.project_key}}</td>
+                <td>{{item.leader}}</td>
+                <td>
+                    <div class="dropdown" style="display: inline-block;">
+                        <button [matMenuTriggerFor]="projectMenu" style="border: none;">
+                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                        </button>
+                        <mat-menu #projectMenu="matMenu">
+                            <button mat-menu-item>Project Settings</button>
+                            <button mat-menu-item>Move to Trash</button>
+                        </mat-menu>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-center">
+        <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+        </pagination-controls>
+    </div>
+</div>

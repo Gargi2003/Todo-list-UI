@@ -1,0 +1,5 @@
+.table-container {
+    height: 400px; /* Adjust the height as per your needs */
+    overflow-y: auto;
+  }
+  

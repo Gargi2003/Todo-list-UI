@@ -20,7 +20,11 @@ import { FormsModule } from '@angular/forms';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { CardDetailsComponent } from './card-details/card-details.component';
 import { CreateTasksComponent } from './create-tasks/create-tasks.component';
-
+import { ProjectCreateComponent } from './project-create/project-create.component';
+import { ProjectViewAllComponent } from './project-view-all/project-view-all.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -32,11 +36,14 @@ import { CreateTasksComponent } from './create-tasks/create-tasks.component';
     SidebarComponent,
     SignupComponent,
     CardDetailsComponent,
-    CreateTasksComponent
+    CreateTasksComponent,
+    ProjectCreateComponent,
+    ProjectViewAllComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatMenuModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatSidenavModule,
@@ -44,7 +51,9 @@ import { CreateTasksComponent } from './create-tasks/create-tasks.component';
     MatIconModule,
     FormsModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatButtonModule,
+    NgxPaginationModule
   ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-US'}],
   bootstrap: [AppComponent]

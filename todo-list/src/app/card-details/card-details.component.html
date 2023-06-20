@@ -79,15 +79,24 @@
                   <p class="modal-header">Details</p>
                  
                   <div class="d-flex">
-                    <p>Assignee:</p>
+                    <p class="me-2">Assignee:</p>
                     <input type="text" [(ngModel)]="this.task.assignee" style="height: 30px;width: 160px;">
                     <i class="fa fa-check fa-lg tick-icon" (click)="updateAssignee()"></i>
                   </div>
                  
                   <p>Label:</p>
-                  <p>Sprint: {{task.sprint}}</p>
-                  <p>Story Point: {{task.points}}</p>
-                  <p>Reporter: {{task.reporter}}</p>
+                  <p>Sprint: {{task.sprint_id}}</p>
+                  <!-- <p>Story Point: {{task.points}}</p> -->
+                  <div class="d-flex">
+                    <p class="me-2">Story Point:</p>
+                    <input type="number" [(ngModel)]="this.task.points" style="height: 30px;width: 160px;">
+                    <i class="fa fa-check fa-lg tick-icon" (click)="updatePoints()"></i>
+                  </div>
+                  <div class="d-flex">
+                    <p class="me-2">Reporter:</p>
+                    <input type="text" [(ngModel)]="this.task.reporter" style="height: 30px;width: 160px;">
+                    <i class="fa fa-check fa-lg tick-icon" (click)="updateReporter()"></i>
+                  </div>
                 </div>
               </div>
               

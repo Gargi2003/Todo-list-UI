@@ -35,7 +35,7 @@ export class CreateTasksComponent {
       status: selectedStatus,
       issue_type: selectedIssueType,
       assignee: assigneeSearchTerm,
-      sprint: sprint,
+      sprint_id: sprint,
       points: storyPoints,
       reporter: reporterSearchTerm
     };
