@@ -28,15 +28,10 @@ export class ProjectCreateComponent {
   }
   generateKey() {
     const randomChar = String.fromCharCode(65 + Math.floor(Math.random() * 26)); // Generate a random character between 'A' and 'Z'
-    console.log("namelength",this.name.length)
     if (this.name.length >= 3) {
-      console.log(">3")
       const projectName = this.name.substr(0, 3).toUpperCase();
-      console.log("projname",projectName)
-      console.log("randomChar",randomChar)
       this.key = projectName+randomChar;
     } else {
-      console.log("<3")
       this.key = this.name.toUpperCase()+randomChar;
     }
   }

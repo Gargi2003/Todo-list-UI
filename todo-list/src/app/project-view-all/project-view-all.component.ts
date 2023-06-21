@@ -83,4 +83,7 @@ export class ProjectViewAllComponent implements OnInit{
       }
     })
   }
+  navigateToTasks(projectId: number) {
+    this.router.navigate(['/tasks'], { queryParams: { projectId: projectId } });
+  }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 // import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { CardDetailsComponent } from '../card-details/card-details.component';
 
@@ -10,14 +11,21 @@ import { CardDetailsComponent } from '../card-details/card-details.component';
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent {
+
   ngOnInit() {
-    this.getTasksStatus();
+   
+    this.route.queryParams.subscribe(params => {
+      this.projectId = Number(params['projectId']);
+    });
+    this.getTaskByProjId();
   }
   tasks: any;
   status: string[] = [];
   todo: any[] = [];
   inProgress: any[] = [];
   done: any[] = [];
+  projectId: any;
+  projectName: string=""
   modalOptions: NgbModalOptions = {
     size: 'xl', // 'xl' represents extra-large size
     scrollable: true
@@ -25,9 +33,9 @@ export class TasksComponent {
 
   constructor(
     private modalService: NgbModal,
-    // private router: Router,
-    private http: HttpClient
-  ) {}
+    private http: HttpClient,
+    private route: ActivatedRoute
+  ) { }
 
   openModal(task: any) {
     console.log(task);
@@ -35,27 +43,47 @@ export class TasksComponent {
     modalRef.componentInstance.task = task;
   }
 
-  getTasksStatus() {
-    // Add the userId to the API request headers
+  getTaskByProjId(){
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json'
       }),
     };
-    this.http.get<any[]>('http://localhost:8081/tasks/list', httpOptions).subscribe(response => {
-      this.tasks = response;
-
-      this.tasks.forEach((task: any) => {
+    this.http.get('http://localhost:8081/tasks/getByProjectId?projectId='+this.projectId, httpOptions).subscribe(response => {
+    this.tasks=response  
+    this.tasks.forEach((task: any) => {
         this.status = task.status;
-        if (this.status.includes('To Do')||this.status.includes('todo')) {
+        console.log(this.status)
+        if (this.status.includes('To Do') || this.status.includes('todo')) {
           this.todo.push(task);
-        } else if (this.status.includes('In Progress')||this.status.includes('inProgress')) {
+        } else if (this.status.includes('In Progress') || this.status.includes('inProgress')) {
           this.inProgress.push(task);
-        } else if (this.status.includes('Done')||this.status.includes('done')) {
+        } else if (this.status.includes('Done') || this.status.includes('done')) {
           this.done.push(task);
         }
       });
     });
   }
+  // getTasksStatus() {
+  //   // Add the userId to the API request headers
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       'Content-Type': 'application/json',
+  //       Authorization: `Bearer ${localStorage.getItem('token')}`,
+  //     }),
+  //   };
+  //   this.http.get<any[]>('http://localhost:8081/tasks/list', httpOptions).subscribe(response => {
+  //     this.tasks = response;
+  //     this.tasks.forEach((task: any) => {
+  //       this.status = task.status;
+  //       if (this.status.includes('To Do') || this.status.includes('todo')) {
+  //         this.todo.push(task);
+  //       } else if (this.status.includes('In Progress') || this.status.includes('inProgress')) {
+  //         this.inProgress.push(task);
+  //       } else if (this.status.includes('Done') || this.status.includes('done')) {
+  //         this.done.push(task);
+  //       }
+  //     });
+  //   });
+  // }
 }
