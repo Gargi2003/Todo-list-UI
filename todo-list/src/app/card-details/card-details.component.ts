@@ -17,7 +17,7 @@ export class CardDetailsComponent {
 
   constructor(private router: Router,private modalService: NgbModal,private http: HttpClient) { }
   @Input() task: any;
-
+  @Input() projectName: string = '';
   ngOnInit() {
     this.selectedStatus = this.task.status;
     // console.log("status", this.selectedStatus)

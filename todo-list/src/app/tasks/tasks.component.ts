@@ -18,6 +18,7 @@ export class TasksComponent {
       this.projectId = Number(params['projectId']);
     });
     this.getTaskByProjId();
+    this.getProjName();
   }
   tasks: any;
   status: string[] = [];
@@ -25,6 +26,7 @@ export class TasksComponent {
   inProgress: any[] = [];
   done: any[] = [];
   projectId: any;
+  proj:any
   projectName: string=""
   modalOptions: NgbModalOptions = {
     size: 'xl', // 'xl' represents extra-large size
@@ -38,9 +40,9 @@ export class TasksComponent {
   ) { }
 
   openModal(task: any) {
-    console.log(task);
     const modalRef = this.modalService.open(CardDetailsComponent, this.modalOptions);
     modalRef.componentInstance.task = task;
+    modalRef.componentInstance.projectName = this.projectName;
   }
 
   getTaskByProjId(){
@@ -63,6 +65,18 @@ export class TasksComponent {
         }
       });
     });
+  }
+  getProjName(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+    };
+    
+    this.http.get('http://localhost:8081/projects/get?id='+this.projectId,httpOptions).subscribe(response=>{
+      this.proj=response
+      this.projectName=this.proj.name
+    })
   }
   // getTasksStatus() {
   //   // Add the userId to the API request headers

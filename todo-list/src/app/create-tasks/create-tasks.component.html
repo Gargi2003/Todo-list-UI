@@ -3,16 +3,15 @@
 </div>
 <div class="modal-body">
   <div class="form-group">
-    <label for="projectDropdown">Project</label>
-    <select class="form-control" id="projectDropdown" [(ngModel)]="selectedProject">
-      <option value="Dummy">Dummy</option>
-      <!-- Add more project options here -->
+    <label for="projectDropdown" style="font-size: 13px;color: gray;">Project</label>
+    <select style="width: 350px;background-color: rgb(242, 242, 244);" [(ngModel)]="selectedProject" class="form-control" (change)="onProjectSelection()">
+      <option *ngFor="let project of projects" [value]="project.name">{{ project.name }}</option>
     </select>
   </div>
   <br>
   <div class="form-group">
-    <label for="issueTypeDropdown">Issue Type</label>
-    <select class="form-control" id="issueTypeDropdown" [(ngModel)]="selectedIssueType">
+    <label for="issueTypeDropdown" style="font-size: 13px;color: gray;">Issue Type</label>
+    <select style="width: 350px; background-color: rgb(242, 242, 244);" class="form-control" id="issueTypeDropdown" [(ngModel)]="selectedIssueType">
       <option value="task">Task</option>
       <option value="bug">Bug</option>
       <option value="epic">Epic</option>
@@ -25,29 +24,30 @@
   <hr class="grayish-line">
   <br>
   <div class="form-group">
-    <label for="statusDropdown">Status</label>
-    <select class="form-control" id="statusDropdown" [(ngModel)]="selectedStatus">
-      <option value="todo">To Do</option>
-      <option value="inProgress">In Progress</option>
-      <option value="done">Done</option>
+    <label for="statusDropdown" style="font-size: 13px;color: gray;">Status</label>
+    <select style="width: 200px;background-color: rgb(242, 242, 244);" class="form-control" id="statusDropdown" [(ngModel)]="selectedStatus">
+      <option value="To Do">To Do</option>
+      <option value="In Progress">In Progress</option>
+      <option value="Done">Done</option>
       <!-- Add more status options here -->
     </select>
+    <p class="mt-2" style="font-size: 10px;color: gray;">This is the issue's initial status upon creation</p>
   </div>
   <br>
   <div class="form-group">
-    <label for="summary">Summary</label>
-    <input type="text" class="form-control" id="summary" [(ngModel)]="summary">
+    <label for="summary" style="font-size: 13px;color: gray;">Summary</label>
+    <input style="width: 550px;" type="text" class="form-control" id="summary" [(ngModel)]="summary">
   </div>
   <br>
   <div class="form-group">
-    <label for="description">Description</label>
-    <textarea class="form-control" id="description" [(ngModel)]="description"></textarea>
+    <label for="description" style="font-size: 13px;color: gray;">Description</label>
+    <textarea style="width: 550px;" class="form-control" id="description" [(ngModel)]="description"></textarea>
   </div>
   <br>
   <div class="form-group">
-    <label>Assignee</label>
+    <label style="font-size: 13px;color: gray;">Assignee</label>
     <div class="assignee-search-box">
-      <input type="text" class="form-control" [(ngModel)]="assigneeSearchTerm" placeholder="Search Assignee" (input)="searchAssignee()">
+      <input style="width: 350px;" type="text" class="form-control" [(ngModel)]="assigneeSearchTerm" placeholder="Search Assignee" (input)="searchAssignee()">
       <!-- Implement search functionality for assignee -->
       <div class="search-results">
         <ul>
@@ -59,19 +59,19 @@
   </div>
   <br>
   <div class="form-group">
-    <label for="sprint">Sprint</label>
-    <input type="text" class="form-control" id="sprint" [(ngModel)]="sprint">
+    <label for="sprint" style="font-size: 13px;color: gray;">Sprint</label>
+    <input style="width: 350px;background-color: rgb(242, 242, 244);" type="number" class="form-control" id="sprint" [(ngModel)]="sprint">
   </div>
   <br>
   <div class="form-group">
-    <label for="storyPoints">Story Points Estimate</label>
-    <input type="number" class="form-control" id="storyPoints" [(ngModel)]="storyPoints">
+    <label for="storyPoints" style="font-size: 13px;color: gray;">Story Points Estimate</label>
+    <input style="width: 350px;background-color: rgb(242, 242, 244);" type="number" class="form-control" id="storyPoints" [(ngModel)]="storyPoints">
   </div>
   <br>
   <div class="form-group">
-    <label>Reporter</label>
+    <label style="font-size: 13px;color: gray;">Reporter</label>
     <div class="reporter-search-box">
-      <input type="text" class="form-control" [(ngModel)]="reporterSearchTerm" placeholder="Search Reporter" (input)="searchReporter()">
+      <input style="width: 350px;" type="text" class="form-control" [(ngModel)]="reporterSearchTerm" placeholder="Search Reporter" (input)="searchReporter()">
       <!-- Implement search functionality for reporter -->
       <div class="search-results">
         <ul>
