@@ -43,6 +43,7 @@ export class TasksComponent {
     const modalRef = this.modalService.open(CardDetailsComponent, this.modalOptions);
     modalRef.componentInstance.task = task;
     modalRef.componentInstance.projectName = this.projectName;
+    modalRef.componentInstance.projectId= this.projectId
   }
 
   getTaskByProjId(){

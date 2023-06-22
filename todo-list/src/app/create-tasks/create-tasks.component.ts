@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class CreateTasksComponent {
   constructor(private router: Router, private modalService: NgbModal, private http: HttpClient) { }
-
+  loading: boolean = false;
   selectedProject: string = '';
   selectedIssueType: string = 'story';
   selectedStatus: string = 'To Do';
@@ -56,7 +56,7 @@ export class CreateTasksComponent {
 
   createTask(selectedProject: any, selectedIssueType: any, selectedStatus: any, summary: any, description: any, assigneeSearchTerm: any, sprint: number, storyPoints: number, reporterSearchTerm: any) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
+    this.loading=true
     // console.log(selectedProject, selectedIssueType, selectedStatus, summary, description, assigneeSearchTerm, sprint, storyPoints, reporterSearchTerm)
     const task = {
       title: summary,
@@ -71,6 +71,7 @@ export class CreateTasksComponent {
     };
     console.log("payload",task)
     this.http.post<any>('http://localhost:8081/tasks', task, { headers }).subscribe(response => {
+      
       console.log(response)
       if (response.includes("successfully")) {
         console.log("entered success")

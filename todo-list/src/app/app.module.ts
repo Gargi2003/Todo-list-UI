@@ -25,6 +25,7 @@ import { ProjectViewAllComponent } from './project-view-all/project-view-all.com
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     MatFormFieldModule,
     MatSelectModule,
     MatButtonModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatProgressSpinnerModule
   ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-US'}],
   bootstrap: [AppComponent]

@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-card-details',
@@ -18,13 +19,17 @@ export class CardDetailsComponent {
   constructor(private router: Router,private modalService: NgbModal,private http: HttpClient) { }
   @Input() task: any;
   @Input() projectName: string = '';
+  @Input() projectId:any;
   ngOnInit() {
     this.selectedStatus = this.task.status;
     // console.log("status", this.selectedStatus)
   }
 
   onCloseClick() {
-    this.modalService.dismissAll();
+    console.log("projid",this.projectId)
+    this.modalService.dismissAll(); 
+    this.router.navigate(['/tasks'],{ queryParams: { projectId: this.projectId } });
+       
   }
   isDropdownOpen = false;
   httpOptions = {
@@ -42,7 +47,7 @@ export class CardDetailsComponent {
         this.modalService.dismissAll();
         this.router.routeReuseStrategy.shouldReuseRoute = () => false; // Reload the route
         this.router.onSameUrlNavigation = 'reload'; // Reload the route
-        this.router.navigate(['/tasks']);
+        this.router.navigate(['/tasks'],{ queryParams: { projectId: this.projectId } });
       }
     })
   }
@@ -81,7 +86,7 @@ export class CardDetailsComponent {
         console.log("success")
         this.router.routeReuseStrategy.shouldReuseRoute = () => false; // Reload the route
         this.router.onSameUrlNavigation = 'reload'; // Reload the route
-        this.router.navigate(['/tasks']);
+        this.router.navigate(['/tasks'],{ queryParams: { projectId: this.projectId } });
       }
     })
   }

@@ -85,5 +85,8 @@
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
-  <button type="button" class="btn btn-primary"(click)="createTask(selectedProject,selectedIssueType,selectedStatus,summary,description,assigneeSearchTerm,sprint,storyPoints,reporterSearchTerm)">Create</button>
+  <div *ngIf="loading">
+    <mat-spinner [diameter]="40"></mat-spinner>
+  </div>
+  <button *ngIf="!loading" type="button" class="btn btn-primary"(click)="createTask(selectedProject,selectedIssueType,selectedStatus,summary,description,assigneeSearchTerm,sprint,storyPoints,reporterSearchTerm)">Create</button>
 </div>
