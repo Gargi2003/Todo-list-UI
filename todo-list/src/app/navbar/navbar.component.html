@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" >Your Work</a>
+                    <a class="nav-link active" [routerLink]="['/work']" aria-current="page" >Your Work</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -36,18 +36,13 @@
                         <li><a class="dropdown-item" href="#">Advanced issue search</a></li>
                     </ul>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                <li class="nav-item ">
+                    <a class="nav-link " [routerLink]="['/dashboard']">
                         Dashboards
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" [routerLink]="['/dashboard']">View all dashboards</a></li>
-                        <li><a class="dropdown-item" href="#">Create Project</a></li>
-                    </ul>
                 </li>
                 <li class="nav-item">
-                    <button class="btn btn-primary" (click)="openModal()">Create</button>
+                    <button class="btn btn-primary" style="margin-left: 5px;" (click)="openModal()">Create</button>
                 </li>
             </ul>
         </div>

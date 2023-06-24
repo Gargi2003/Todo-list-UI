@@ -5,7 +5,9 @@
   <div class="form-group">
     <label for="projectDropdown" style="font-size: 13px;color: gray;">Project</label>
     <select style="width: 350px;background-color: rgb(242, 242, 244);" [(ngModel)]="selectedProject" class="form-control" (change)="onProjectSelection()">
-      <option *ngFor="let project of projects" [value]="project.name">{{ project.name }}</option>
+      <option *ngFor="let project of projects" [value]="project.name">
+        {{ project.name }}
+      </option>
     </select>
   </div>
   <br>

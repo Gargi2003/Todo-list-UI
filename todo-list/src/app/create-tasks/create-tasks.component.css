@@ -6,12 +6,6 @@
     margin-bottom: 10px;
   }
   
-  /* .grayish-line {
-    border-top: 1px solid rgb(238, 236, 236);
-    margin-top: 12px;
-    margin-bottom: 12px;
-  } */
-  
   .assignee-search-box,
   .reporter-search-box {
     position: relative;
@@ -22,15 +16,7 @@
     margin-bottom: 10px;
   }
   
-  /* .search-results {
-    position: absolute;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 5px;
-    z-index: 1;
-  } */
-  
+ 
   .search-results ul {
     list-style-type: none;
     padding: 0;
@@ -41,11 +27,4 @@
     cursor: pointer;
   }
   
-  /* .selected-assignee,
-  .selected-reporter {
-    margin-top: 10px;
-    background-color: #eee;
-    padding: 5px;
-    border-radius: 4px;
-  } */
-  
+ 

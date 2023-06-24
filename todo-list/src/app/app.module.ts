@@ -26,6 +26,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { YourWorkComponent } from './your-work/your-work.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     CardDetailsComponent,
     CreateTasksComponent,
     ProjectCreateComponent,
-    ProjectViewAllComponent
+    ProjectViewAllComponent,
+    YourWorkComponent
   ],
   imports: [
     BrowserModule,

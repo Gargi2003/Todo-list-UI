@@ -20,6 +20,7 @@ export class SidebarComponent {
     console.log("on init")
     this.getProjName();
   }
+  projUrl:any;
   getProjName(){
     console.log("inside getprojname")
     const httpOptions = {
@@ -27,11 +28,12 @@ export class SidebarComponent {
         'Content-Type': 'application/json'
       }),
     };
-    
+   
     this.http.get('http://localhost:8081/projects/get?id='+this.projectId,httpOptions).subscribe((response:any)=>{
       console.log("id",this.projectId)
       this.proj=response
       this.projectName=this.proj.name
+      this.projUrl=this.proj.project_avatar
       console.log(response)
     })
   }

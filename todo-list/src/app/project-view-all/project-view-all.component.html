@@ -26,7 +26,7 @@
         <tbody>
             <tr *ngFor="let item of filteredProjects | paginate : pagingConfig; let i = index">
                 <th scope="row"></th>
-                <td><img src="https://i.postimg.cc/tRVRnW40/people-2.png" height="20px" width="20px"><a  (click)="navigateToTasks(item.id)">{{item.name}}</a></td>
+                <td><img [src]="item.project_avatar ? item.project_avatar : 'https://i.postimg.cc/tRVRnW40/people-2.png'" height="20px" width="20px"><a style="cursor: pointer;" (click)="navigateToTasks(item.id)">{{item.name}}</a></td>
                 <td>{{item.project_key}}</td>
                 <td>{{item.leader}}</td>
                 <td>

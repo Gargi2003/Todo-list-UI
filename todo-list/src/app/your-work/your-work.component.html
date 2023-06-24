@@ -1,0 +1,31 @@
+<app-navbar></app-navbar>
+<br>
+<div class="container">
+    <h4>Your Work</h4>
+    <br><br>
+    <div class="d-flex" style="justify-content:space-between">
+        <h6>Recent Projects</h6>
+        <a [routerLink]="['/view-all-project']">View all projects</a>
+    </div>
+
+</div>
+
+<div class="container card-container">
+    <div class="card projcard" *ngFor="let item of project " [style.borderLeftColor]="getRandomColor()">
+        <div class="project-details">
+            <img [src]="item.project_avatar ? item.project_avatar : 'https://i.postimg.cc/tRVRnW40/people-2.png'" height="30px" width="30px" style="margin-right: 5px;">
+            <div>
+                <p style="font-weight: 500;"><a style="cursor: pointer;" (click)="navigateToTasks(item.id)">{{item.name}}</a></p>
+                <p style="margin-top:-20px; font-size: 12px; font-weight: 500; color: gray;">
+                    Team-managed software</p>
+            </div>
+        </div>
+        <p style="font-size: 14px;font-weight: 500;color: gray;margin-left: 6px;">Quick links</p>
+        <p style="margin-top:-10px;font-size: 13px;font-weight: 400;margin-left: 6px;">Open Issues <span
+                style="margin-left: 4px;background-color: rgb(222, 221, 221);padding: 0px 5px 0px 5px;">1</span><br>
+            Done Issues
+        </p>
+
+    </div>
+
+</div>

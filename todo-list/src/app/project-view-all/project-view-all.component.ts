@@ -31,8 +31,6 @@ export class ProjectViewAllComponent implements OnInit{
   totalItems: number = 0;
   tableSize:any
   pagingConfig: PagingConfig = {} as PagingConfig;
-
-
   projects:any[]=[]
   page: number = 1;
   project:any
@@ -53,11 +51,7 @@ export class ProjectViewAllComponent implements OnInit{
     this.pagingConfig.currentPage  = event;
     this.getProjects();
   }
-  onTableSizeChange(event:any): void {
-    this.pagingConfig.itemsPerPage = event.target.value;
-    this.pagingConfig.currentPage = 1;
-    this.getProjects();
-  }
+
   searchProjects() {
     if (this.searchKeyword.trim() !== '') {
       this.filteredProjects = this.project.filter(
