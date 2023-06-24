@@ -1,7 +1,9 @@
 .card-head{
     border-top: 6px solid #2684ff;
-    height: 298px;
+    height: 310px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
 .table-header th{
     width: 50px;font-size: 12px; color: gray;   
 }
@@ -28,4 +30,10 @@
   .container::-webkit-scrollbar-thumb:hover {
     background-color: #555; /* Set the color of the scrollbar thumb on hover */
   }
-  
+  .table-sm{
+    font-size: 13px;
+    font-weight: 400;
+  }
+  .container-outer{
+    margin: 50px;
+  }
