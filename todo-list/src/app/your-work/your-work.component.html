@@ -1,8 +1,6 @@
 <app-navbar></app-navbar>
 <br>
-<div class="container">
-    <h4>Your Work</h4>
-    <br><br>
+<div class="head">
     <div class="d-flex" style="justify-content:space-between">
         <h6>Recent Projects</h6>
         <a [routerLink]="['/view-all-project']">View all projects</a>
@@ -10,12 +8,14 @@
 
 </div>
 
-<div class="container card-container">
+<div class=" card-container">
     <div class="card projcard" *ngFor="let item of project " [style.borderLeftColor]="getRandomColor()">
         <div class="project-details">
-            <img [src]="item.project_avatar ? item.project_avatar : 'https://i.postimg.cc/tRVRnW40/people-2.png'" height="30px" width="30px" style="margin-right: 5px;">
+            <img [src]="item.project_avatar ? item.project_avatar : 'https://i.postimg.cc/tRVRnW40/people-2.png'"
+                height="30px" width="30px" style="margin-right: 5px;">
             <div>
-                <p style="font-weight: 500;"><a style="cursor: pointer;" (click)="navigateToTasks(item.id)">{{item.name}}</a></p>
+                <p style="font-weight: 500;"><a style="cursor: pointer;"
+                        (click)="navigateToTasks(item.id)">{{item.name}}</a></p>
                 <p style="margin-top:-20px; font-size: 12px; font-weight: 500; color: gray;">
                     Team-managed software</p>
             </div>
@@ -29,3 +29,55 @@
     </div>
 
 </div>
+<br>
+<ul class="nav nav-tabs m-4">
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">Worked on</a>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link " href="#">Viewed</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Assigned</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link " href="#">Starred</a>
+    </li>
+</ul>
+
+<!-- <div class="container"> -->
+    <div class="accordion tasks-accordion" *ngFor="let group of tasksByCreateDate">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    [attr.data-bs-target]="'#collapse' + group.createDate">
+                    {{ group.createDate }}
+                </button>
+            </h2>
+            <div [attr.id]="'collapse' + group.createDate" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                    <div *ngFor="let task of group.tasks">
+                        <div class="d-flex">
+                            <img *ngIf="task.issue_type === 'Defect'|| task.issue_type === 'defect' || task.issue_type === 'Bug'|| task.issue_type === 'bug'"
+                                src="https://i.postimg.cc/ppCynbfY/defect.jpg" height="15" width="15" alt="Defect Image"
+                                style="margin-top: 4px;">
+                            <img *ngIf="task.issue_type === 'Story'|| task.issue_type === 'story'"
+                                src="https://i.postimg.cc/hQr4xTdP/story.jpg" height="15" width="15" alt="Defect Image"
+                                style="margin-top: 4px;">
+                            <img *ngIf="task.issue_type === 'Epic'|| task.issue_type === 'epic'"
+                                src="https://i.postimg.cc/tnyCY27M/epic.jpg" height="15" width="15" alt="Defect Image"
+                                style="margin-top: 4px;">
+                            <img *ngIf="task.issue_type === 'Task'|| task.issue_type === 'task'"
+                                src="https://i.postimg.cc/yxt0Rwf6/task.jpg" height="15" width="15" alt="Defect Image"
+                                style="margin-top: 4px;">
+                            <p>{{ task.title }}</p>
+                        </div>
+                        <p style="margin-top: -10px; margin-bottom: 20px; font-size: 12px; font-weight: 500; color: gray;">
+                            {{ key }} <span>{{ projname }}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- </div> -->
