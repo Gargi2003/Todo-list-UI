@@ -49,7 +49,8 @@ export class TasksComponent {
   getTaskByProjId(){
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       }),
     };
     this.http.get('http://localhost:8081/tasks/getByProjectId?projectId='+this.projectId, httpOptions).subscribe(response => {
@@ -70,7 +71,8 @@ export class TasksComponent {
   getProjName(){
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       }),
     };
     

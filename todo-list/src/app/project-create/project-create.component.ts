@@ -36,14 +36,19 @@ export class ProjectCreateComponent {
     "https://i.postimg.cc/SXLnrBBb/ufo-3.png"
   ];
   createProject() {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const headers = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      }),
+    };
     const proj = {
       name: this.name,
       project_key: this.key,
       leader: this.leader,
       project_avatar: this.getRandomAvatar()
     }
-    this.http.post('http://localhost:8081/projects', proj, { headers }).subscribe((response: any) => {
+    this.http.post('http://localhost:8081/projects', proj, headers ).subscribe((response: any) => {
       if (response.includes("successfully")) {
         this.router.navigate(['/view-all-project']);
       }

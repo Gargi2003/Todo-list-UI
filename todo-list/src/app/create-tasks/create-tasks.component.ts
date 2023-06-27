@@ -33,8 +33,9 @@ export class CreateTasksComponent {
   getProjects() {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      }),
     };
 
     this.http.get('http://localhost:8081/projects/list', httpOptions).subscribe(response => {

@@ -9,10 +9,13 @@ import { CardDetailsComponent } from './card-details/card-details.component';
 import { ProjectCreateComponent } from './project-create/project-create.component';
 import { ProjectViewAllComponent } from './project-view-all/project-view-all.component';
 import { YourWorkComponent } from './your-work/your-work.component';
+import { CreateTasksComponent } from './create-tasks/create-tasks.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'create-tasks', component: CreateTasksComponent, canActivate: [AuthGuard] },
+
   { path: 'work', component: YourWorkComponent, canActivate: [AuthGuard] },
   { path: 'tasks', component: TasksComponent, canActivate: [AuthGuard] },
   { path: 'create-project', component: ProjectCreateComponent, canActivate: [AuthGuard] },

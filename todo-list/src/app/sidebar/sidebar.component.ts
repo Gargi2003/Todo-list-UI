@@ -25,10 +25,10 @@ export class SidebarComponent {
     console.log("inside getprojname")
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       }),
     };
-   
     this.http.get('http://localhost:8081/projects/get?id='+this.projectId,httpOptions).subscribe((response:any)=>{
       console.log("id",this.projectId)
       this.proj=response

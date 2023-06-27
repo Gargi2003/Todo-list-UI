@@ -68,9 +68,14 @@ export class ProjectViewAllComponent implements OnInit{
   }
   deleteProject(id:any) {
     console.log("id",id)
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const headers = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      }),
+    };
     console.log(id)
-    this.http.delete('http://localhost:8081/projects/delete?id='+id , { headers }).subscribe((res: any) => {
+    this.http.delete('http://localhost:8081/projects/delete?id='+id , headers ).subscribe((res: any) => {
       if (res.includes("Deleted")) {
         this.router.navigate(['/view-all-project']);
         location.reload();

@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+interface MyObject {
+  key: string;
+  projectName: string;
+}
 
 @Component({
   selector: 'app-your-work',
@@ -28,7 +32,7 @@ export class YourWorkComponent {
   constructor(private http: HttpClient, private router: Router) { }
 
   projectId: any;
-
+  myMap: Map<number, MyObject> = new Map();
   getProjects() {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -38,6 +42,11 @@ export class YourWorkComponent {
     };
     this.http.get('http://localhost:8081/projects/list', httpOptions).subscribe(response => {
       this.project = response;
+      console.log(this.project)
+      // console.log(this.project.name)
+      for (let i = 0; i < this.project.length; i++) {
+        this.myMap.set(this.project[i].id, { key: this.project[i].project_key, projectName: this.project[i].name });
+      }
     });
   }
 
@@ -48,6 +57,8 @@ export class YourWorkComponent {
   audit: any;
   tasksByCreateDate: { createDate: string, label: string, tasks: any[] }[] = [];
   issueType: any
+  projName: any
+  key: any
   getAudit() {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -68,39 +79,29 @@ export class YourWorkComponent {
           groupedTasks[createDate] = [];
         }
 
-        // Add the task to the respective create date group
-        groupedTasks[createDate].push(task);
-        this.getProjectById(task.project_id)
-        this.issueType = task.issue_type
+        // Check if the project ID exists in myMap
+        const project = this.myMap.get(task.project_id);
+        if (project) {
+          groupedTasks[createDate].push({
+            ...task,
+            projName: project.projectName,
+            key: project.key
+          });
+        }
       }
 
       // Convert the grouped tasks into the tasksByCreateDate array
       for (const createDate in groupedTasks) {
-        if (groupedTasks.hasOwnProperty(createDate)) {
+        if (groupedTasks.hasOwnProperty(createDate) && groupedTasks[createDate].length > 0) {
           const label = this.getLabel(createDate);
           this.tasksByCreateDate.push({ createDate: createDate, label: label, tasks: groupedTasks[createDate] });
         }
       }
+      console.log(groupedTasks)
     });
   }
 
-  key: any;
-  proj: any;
-  projname: any;
 
-  getProjectById(id: number) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      }),
-    };
-    this.http.get('http://localhost:8081/projects/get?id=' + id, httpOptions).subscribe(response => {
-      this.proj = response;
-      this.key = this.proj.project_key;
-      this.projname = this.proj.name;
-    });
-  }
 
   getLabel(date: any): string {
     const createDate = new Date(date);

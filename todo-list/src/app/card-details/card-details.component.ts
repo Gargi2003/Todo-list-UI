@@ -32,12 +32,13 @@ export class CardDetailsComponent {
        
   }
   isDropdownOpen = false;
-  httpOptions = {
+   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     }),
   };
+  
   //delete task
   onClickDelete() {
     this.http.delete('http://localhost:8081/tasks/delete?id='+this.task.id,this.httpOptions).subscribe((response:any) => {
