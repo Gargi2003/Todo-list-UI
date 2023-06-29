@@ -21,9 +21,10 @@
               <i class="fa fa-user"></i>
             </button>
           </form>
-          <div class="d-flex" style="align-items: center;">
+          <div class="d-flex" style="align-items: center;" >
             <i class="fa fa-star-o me-4" aria-hidden="true"></i>
-            <i class="fa fa-clock-o me-4" aria-hidden="true"><span class="m-2" style="font-size: 14px;color: rgb(87, 87, 87);">0 days remaining</span></i> 
+            <i *ngIf="tasks" class="fa fa-clock-o me-4" aria-hidden="true"><span class="m-2"
+                style="font-size: 14px;color: rgb(87, 87, 87);">0 days remaining</span></i>
           </div>
         </div>
       </div>
@@ -33,6 +34,15 @@
           <div class="task-column">
             <p>To Do</p>
             <div class="cards-row" style="max-height: 90%; overflow-y: scroll;">
+              <div class="row" *ngIf="!tasks">
+                <img class="mt-4" src="../../assets/msg-removebg-preview.png" />
+                <p style="font-weight: bold;font-size: 15px;color: rgb(45, 44, 44);margin-top: 30px;margin-left: 20%;">
+                  Get started in backlog.</p>
+                <p style="margin-left: 10%;">Plan and start a sprint to see </p>
+                <p style="margin-top: -20px;margin-left: 30%;"> issues here</p>
+                <button class="btn btn-secondary btn-sm" style="width: 140px;
+                margin-left: 75px;">Go to Backlog</button>
+              </div>
               <div class="row " *ngFor="let item of todo">
                 <div class="card bg-gray card-background" (click)="openModal(item)">
                   <div class="card-body">
@@ -130,13 +140,13 @@
         <div class="icon-ellipsis" (click)="toggleDropdown()">
           <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
           <div class="dropdown-menu" *ngIf="showDropdown">
-            <a class="dropdown-item" href="#">Edit sprint</a>
+            <a *ngIf="tasks" class="dropdown-item" href="#">Edit sprint</a>
             <a class="dropdown-item" href="#">Configure board</a>
             <a class="dropdown-item" href="#">Manage workflow</a>
             <a class="dropdown-item" href="#">Manage custom filters</a>
           </div>
         </div>
-        <button class="btn btn-primary sprint">Complete Sprint</button>
+        <button class="btn btn-primary sprint" *ngIf="tasks">Complete Sprint</button>
       </div>
     </div>
   </div>

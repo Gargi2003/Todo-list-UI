@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { CardDetailsComponent } from '../card-details/card-details.component';
-import{ApiService} from '../services/api-service.service'
+import { ApiService } from '../services/api-service.service'
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
@@ -13,13 +13,12 @@ import{ApiService} from '../services/api-service.service'
 export class TasksComponent {
 
   ngOnInit() {
-   
+
     this.route.queryParams.subscribe(params => {
       this.projectId = Number(params['projectId']);
     });
-    this.TaskByProjId();
     this.ProjName();
-    this.listSprint()
+    this.listSprint();
   }
   tasks: any;
   status: string[] = [];
@@ -27,8 +26,8 @@ export class TasksComponent {
   inProgress: any[] = [];
   done: any[] = [];
   projectId: any;
-  proj:any
-  projectName: string=""
+  proj: any
+  projectName: string = ""
   modalOptions: NgbModalOptions = {
     size: 'xl', // 'xl' represents extra-large size
     scrollable: true
@@ -44,13 +43,14 @@ export class TasksComponent {
     const modalRef = this.modalService.open(CardDetailsComponent, this.modalOptions);
     modalRef.componentInstance.task = task;
     modalRef.componentInstance.projectName = this.projectName;
-    modalRef.componentInstance.projectId= this.projectId
+    modalRef.componentInstance.projectId = this.projectId
   }
 
-  TaskByProjId(){
-    this.apiService.getTaskByProjId(this.projectId).subscribe(response => {
-    this.tasks=response  
-    this.tasks.forEach((task: any) => {
+  TaskBySprintIdAndProjectId(sprint_id:number,project_id:number) {
+    this.apiService.getTaskBySprint(sprint_id, project_id).subscribe(response => {
+      this.tasks = response
+      console.log("tasksbysprintproj",this.tasks)
+      this.tasks.forEach((task: any) => {
         this.status = task.status;
         if (this.status.includes('To Do') || this.status.includes('todo')) {
           this.todo.push(task);
@@ -62,12 +62,12 @@ export class TasksComponent {
       });
     });
   }
-  key:any
-  ProjName(){
-    this.apiService.getProjName(this.projectId).subscribe(response=>{
-      this.proj=response
-      this.projectName=this.proj.name
-      this.key=this.proj.project_key
+  key: any
+  ProjName() {
+    this.apiService.getProjName(this.projectId).subscribe(response => {
+      this.proj = response
+      this.projectName = this.proj.name
+      this.key = this.proj.project_key
     })
   }
   showDropdown: boolean = false;
@@ -76,19 +76,38 @@ export class TasksComponent {
     this.showDropdown = !this.showDropdown;
   }
 
-  TaskBySprint(){
-    this.apiService.getTaskBySprint(this.projectId).subscribe(response=>{
-      this.proj=response
-      this.projectName=this.proj.name
-      this.key=this.proj.project_key
-    })
-  }
-  sprintInfo:any
-  listSprint(){
-    this.apiService.getSprintList().subscribe(response=>{
-      this.sprintInfo=response
-      console.log(this.sprintInfo)
-    })
+
+  sprintInfo: any
+  currentSprint: any
+  listSprint() {
+    this.apiService.getSprintList().subscribe(response => {
+      this.sprintInfo = response;
+      console.log(this.sprintInfo);
+      console.log(this.projectId);
+  
+      // Filter sprints based on projectId
+      const filteredSprints = this.sprintInfo.filter((sprint:any) => sprint.project_id === this.projectId);
+  
+      for (let j = 0; j < filteredSprints.length; j++) {
+        console.log("entered if",filteredSprints);
+        // Find the current sprint
+        const currentDate = new Date();
+        let closestEndDate = new Date(filteredSprints[0].end_date); // Assuming the first sprint is the closest initially
+        this.currentSprint = filteredSprints[0];
+  
+        for (let i = 1; i < filteredSprints.length; i++) {
+          const endDate = new Date(filteredSprints[i].end_date);
+          if (endDate > currentDate && endDate < closestEndDate) {
+            closestEndDate = endDate;
+            this.currentSprint = filteredSprints[i];
+          }
+        }
+  
+        console.log('Current Sprint:', this.currentSprint);
+        this.TaskBySprintIdAndProjectId(this.currentSprint.id,this.projectId);
+      }
+    });
   }
   
+
 }
