@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import jwt_decode from 'jwt-decode'; // Import jwt_decode library
+import { ApiService } from '../services/api-service.service'
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import jwt_decode from 'jwt-decode'; // Import jwt_decode library
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private http: HttpClient,private apiService: ApiService) { }
 
   navigateToSignup() {
     this.router.navigate(['/signup']);
@@ -21,15 +22,8 @@ export class LoginComponent {
       password
     };
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-    console.log("inside login")
-    console.log(payload)
     // Make a POST request to the login API endpoint
-    this.http.post<any>('http://localhost:8080/users/login', payload).subscribe(
+    this.apiService.loginUser(payload).subscribe(
       (response) => {
         // If login is successful, navigate to the dashboard page
         if (response.status === 200) {
@@ -39,12 +33,10 @@ export class LoginComponent {
           // Extract the user_id from the JWT token
           const decodedToken: any = jwt_decode(response.token);
           const userId: string = decodedToken.sub;
-          console.log(userId)
           // Redirect to the dashboard page with the extracted user_id
           this.router.navigate(['/dashboard', { userId: userId }]);
         } else {
-          console.log("failure!!")
-          console.log(payload)
+      
           // Handle login failure, show an error message or perform other actions
         }
       },

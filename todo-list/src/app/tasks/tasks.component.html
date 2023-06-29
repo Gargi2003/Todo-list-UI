@@ -1,18 +1,17 @@
 <app-navbar></app-navbar>
-<br>
-<div class="container" >
+<div class="container">
   <div class="row">
     <div class="col col-2">
       <app-sidebar></app-sidebar>
     </div>
     <div class="col col-8">
-      <div class="row">
-        <div class="col col-4">
-          <!-- <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Project</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Project Name</li>
-          </ol> -->
-          <h5>{{projectName}}</h5>
+      <div class="row d-flex">
+        <ol style="font-size: 14px;margin-top: 10px;" class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Projects</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{projectName}}</li>
+        </ol>
+        <h5 style="margin-top: -10px;">{{projectName}}</h5>
+        <div class="col d-flex" style="justify-content: space-between;">
           <form class="d-flex my-2 my-lg-0">
             <input class="form-control mr-sm-2 me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-primary me-2" type="submit">
@@ -22,6 +21,10 @@
               <i class="fa fa-user"></i>
             </button>
           </form>
+          <div class="d-flex" style="align-items: center;">
+            <i class="fa fa-star-o me-4" aria-hidden="true"></i>
+            <i class="fa fa-clock-o me-4" aria-hidden="true"><span class="m-2" style="font-size: 14px;color: rgb(87, 87, 87);">0 days remaining</span></i> 
+          </div>
         </div>
       </div>
       <br>
@@ -29,28 +32,59 @@
         <div class="col">
           <div class="task-column">
             <p>To Do</p>
-            <div class="container-fluid" style="max-height: 90%; overflow-y: scroll;">
-              <div class="row rows" *ngFor="let item of todo" >
+            <div class="cards-row" style="max-height: 90%; overflow-y: scroll;">
+              <div class="row " *ngFor="let item of todo">
                 <div class="card bg-gray card-background" (click)="openModal(item)">
                   <div class="card-body">
-                    <h5 class="card-title">{{ item.title }}</h5>
-                    <p class="card-text">{{ item.description }}</p>
+                    <p style="font-size: 14px;" class="card-title">{{ item.title }}</p>
+                    <!-- <p class="card-text">{{ item.description }}</p> -->
+                    <div class="d-flex">
+                      <img
+                        *ngIf="item.issue_type === 'Defect' || item.issue_type === 'defect' || item.issue_type === 'Bug' || item.issue_type === 'bug'"
+                        src="https://i.postimg.cc/ppCynbfY/defect.jpg" height="15" width="15" alt="Defect Image"
+                        style="margin-top: 4px;">
+                      <img *ngIf="item.issue_type === 'Story' || item.issue_type === 'story'"
+                        src="https://i.postimg.cc/hQr4xTdP/story.jpg" height="15" width="15" alt="Defect Image"
+                        style="margin-top: 4px;">
+                      <img *ngIf="item.issue_type === 'Epic' || item.issue_type === 'epic'"
+                        src="https://i.postimg.cc/tnyCY27M/epic.jpg" height="15" width="15" alt="Defect Image"
+                        style="margin-top: 4px;">
+                      <img *ngIf="item.issue_type === 'Task' || item.issue_type === 'task'"
+                        src="https://i.postimg.cc/yxt0Rwf6/task.jpg" height="15" width="15" alt="Defect Image"
+                        style="margin-top: 4px;">
+                      <p style="font-size: 14px;margin-left: 5px;margin-top: 2px;">{{key}}-{{item.id}}</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>   
+            </div>
           </div>
         </div>
-        
+
         <div class="col">
           <div class="task-column">
             <p>In Progress</p>
-            <div class="container-fluid" style="max-height: 90%; overflow-y: scroll;">
-              <div class="row rows" *ngFor="let item of inProgress">
+            <div class="cards-row" style="max-height: 90%; overflow-y: scroll;">
+              <div class="row " *ngFor="let item of inProgress">
                 <div class="card bg-gray card-background " (click)="openModal(item)">
                   <div class="card-body">
-                    <h5 class="card-title">{{ item.title }}</h5>
-                    <p class="card-text">{{ item.description }}</p>
+                    <p style="font-size: 14px;" class="card-title">{{ item.title }}</p>
+                    <div class="d-flex">
+                      <img
+                        *ngIf="item.issue_type === 'Defect' || item.issue_type === 'defect' || item.issue_type === 'Bug' || item.issue_type === 'bug'"
+                        src="https://i.postimg.cc/ppCynbfY/defect.jpg" height="15" width="15" alt="Defect Image"
+                        style="margin-top: 4px;">
+                      <img *ngIf="item.issue_type === 'Story' || item.issue_type === 'story'"
+                        src="https://i.postimg.cc/hQr4xTdP/story.jpg" height="15" width="15" alt="Defect Image"
+                        style="margin-top: 4px;">
+                      <img *ngIf="item.issue_type === 'Epic' || item.issue_type === 'epic'"
+                        src="https://i.postimg.cc/tnyCY27M/epic.jpg" height="15" width="15" alt="Defect Image"
+                        style="margin-top: 4px;">
+                      <img *ngIf="item.issue_type === 'Task' || item.issue_type === 'task'"
+                        src="https://i.postimg.cc/yxt0Rwf6/task.jpg" height="15" width="15" alt="Defect Image"
+                        style="margin-top: 4px;">
+                      <p style="font-size: 14px;margin-left: 5px;margin-top: 2px;">{{key}}-{{item.id}}</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -61,12 +95,27 @@
         <div class="col">
           <div class="task-column">
             <p>Done</p>
-            <div class="container-fluid" style="max-height: 90%; overflow-y: scroll;">
-              <div class="row rows" *ngFor="let item of done">
+            <div class="cards-row" style="max-height: 90%; overflow-y: scroll;">
+              <div class="row " *ngFor="let item of done">
                 <div class="card bg-gray card-background" (click)="openModal(item)">
                   <div class="card-body">
-                    <h5 class="card-title">{{ item.title }}</h5>
-                    <p class="card-text">{{ item.description }}</p>
+                    <p style="font-size: 14px;" class="card-title">{{ item.title }}</p>
+                    <div class="d-flex">
+                      <img
+                        *ngIf="item.issue_type === 'Defect' || item.issue_type === 'defect' || item.issue_type === 'Bug' || item.issue_type === 'bug'"
+                        src="https://i.postimg.cc/ppCynbfY/defect.jpg" height="15" width="15" alt="Defect Image"
+                        style="margin-top: 4px;">
+                      <img *ngIf="item.issue_type === 'Story' || item.issue_type === 'story'"
+                        src="https://i.postimg.cc/hQr4xTdP/story.jpg" height="15" width="15" alt="Defect Image"
+                        style="margin-top: 4px;">
+                      <img *ngIf="item.issue_type === 'Epic' || item.issue_type === 'epic'"
+                        src="https://i.postimg.cc/tnyCY27M/epic.jpg" height="15" width="15" alt="Defect Image"
+                        style="margin-top: 4px;">
+                      <img *ngIf="item.issue_type === 'Task' || item.issue_type === 'task'"
+                        src="https://i.postimg.cc/yxt0Rwf6/task.jpg" height="15" width="15" alt="Defect Image"
+                        style="margin-top: 4px;">
+                      <p style="font-size: 14px;margin-left: 5px;margin-top: 2px;">{{key}}-{{item.id}}</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -74,6 +123,20 @@
             <!-- Add your content for the "Done" column here -->
           </div>
         </div>
+      </div>
+    </div>
+    <div class="col col-2">
+      <div class="d-flex" style="margin-top: 68.5px;">
+        <div class="icon-ellipsis" (click)="toggleDropdown()">
+          <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+          <div class="dropdown-menu" *ngIf="showDropdown">
+            <a class="dropdown-item" href="#">Edit sprint</a>
+            <a class="dropdown-item" href="#">Configure board</a>
+            <a class="dropdown-item" href="#">Manage workflow</a>
+            <a class="dropdown-item" href="#">Manage custom filters</a>
+          </div>
+        </div>
+        <button class="btn btn-primary sprint">Complete Sprint</button>
       </div>
     </div>
   </div>

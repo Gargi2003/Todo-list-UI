@@ -1,45 +1,102 @@
 .task-column {
   background-color: rgb(238, 236, 236);
   padding: 10px;
-  height: 600px; 
+  height: 600px;
   border-radius: 10px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
 
-}
-.rows{
-  margin: 10px;
 }
 
 .card-background {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   margin: 4px;
-  transition: transform 0.3s;
+  /* transition: transform 0.3s; */
 }
 
 .card-background:hover {
   cursor: pointer;
-  transform: scale(1.1);
+  background-color: rgb(238, 236, 236);
+  /* transform: scale(1.1); */
 }
-.task-column > div.container-fluid {
+
+.task-column>div.cards-row {
   max-height: calc(90% - 20px);
   overflow-y: auto;
   overflow-x: hidden;
   cursor: pointer;
 }
 
-.task-column > div.container-fluid::-webkit-scrollbar {
+.task-column>div.cards-row::-webkit-scrollbar {
   width: 6px;
 }
 
-.task-column > div.container-fluid::-webkit-scrollbar-track {
+.task-column>div.cards-row::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
-.task-column > div.container-fluid::-webkit-scrollbar-thumb {
+.task-column>div.cards-row::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 }
 
-.task-column > div.container-fluid:focus::-webkit-scrollbar-thumb {
+.task-column>div.cards-row:focus::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.4);
+}
+
+.icon-ellipsis {
+  background-color: rgb(224, 223, 223);
+  padding: 10px;
+  height: 35px;
+}
+
+.icon-ellipsis i {
+  position: relative;
+  top: -5px;
+}
+
+.icon-ellipsis i :hover {
+  cursor: pointer;
+}
+
+.icon-ellipsis:hover {
+  cursor: pointer;
+  background-color: rgb(185, 182, 182);
+}
+
+.sprint {
+  height: 35px;
+  font-size: 14px;
+  margin-left: 10px;
+
+}
+
+.card-body {
+  height: 100px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: none;
+}
+
+.dropdown-menu {
+  display: block;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 0.5rem 1rem;
+  clear: both;
+  font-weight: 400;
+  color: #212529;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+}
+.dropdown-item:hover{
+  background-color: rgb(224, 223, 223)
 }

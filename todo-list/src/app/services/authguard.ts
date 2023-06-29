@@ -18,19 +18,16 @@ export class AuthGuard implements CanActivate {
       return this.authService.validateToken().pipe(
         map((response) => {
           // Token is valid, user is authenticated
-          console.log("response from authguard"+response)
           return true;
         }),
         catchError((error) => {
           // Token is invalid or expired, redirect to login
-          console.log("response from authguard"+error)
           this.router.navigate(['/login']);
           return of(false);
         })
       );
     } else {
       // Token is not present, redirect to login
-      console.log("response from authguard"+"token not present")
       this.router.navigate(['/login']);
       return of(false);
     }

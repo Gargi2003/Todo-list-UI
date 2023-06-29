@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ApiService } from '../services/api-service.service'
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-tasks.component.css']
 })
 export class CreateTasksComponent {
-  constructor(private router: Router, private modalService: NgbModal, private http: HttpClient) { }
+  constructor(private router: Router, private modalService: NgbModal, private apiService: ApiService) { }
   loading: boolean = false;
   selectedProject: string = '';
   selectedIssueType: string = 'story';
@@ -27,38 +27,27 @@ export class CreateTasksComponent {
   projects: any;
   projId: any
   ngOnInit() {
-    this.getProjects(); // Call the method to retrieve the project list
+    this.Projects(); // Call the method to retrieve the project list
   }
 
-  getProjects() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      }),
-    };
-
-    this.http.get('http://localhost:8081/projects/list', httpOptions).subscribe(response => {
+  Projects() {
+    this.apiService.getProjects().subscribe(response => {
       this.projects = response
     });
   }
   onProjectSelection() {
-    console.log("selectedproj",this.selectedProject)
     const selectedProject = this.projects.find((project:any) => project.name === this.selectedProject);
     if (selectedProject) {
       this.selectedProject = selectedProject.name; // Update selectedProject to ensure consistency
       this.projId = selectedProject.id;
     } else {
-      console.log('Selected project not found');
       return;
     }
   }
   
 
-  createTask(selectedProject: any, selectedIssueType: any, selectedStatus: any, summary: any, description: any, assigneeSearchTerm: any, sprint: number, storyPoints: number, reporterSearchTerm: any) {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  TaskCreate(selectedIssueType: any, selectedStatus: any, summary: any, description: any, assigneeSearchTerm: any, sprint: number, storyPoints: number, reporterSearchTerm: any) {
     this.loading=true
-    // console.log(selectedProject, selectedIssueType, selectedStatus, summary, description, assigneeSearchTerm, sprint, storyPoints, reporterSearchTerm)
     const task = {
       title: summary,
       description: description,
@@ -70,12 +59,9 @@ export class CreateTasksComponent {
       points: storyPoints,
       reporter: reporterSearchTerm
     };
-    console.log("payload",task)
-    this.http.post<any>('http://localhost:8081/tasks', task, { headers }).subscribe(response => {
+    this.apiService.createTask(task).subscribe(response => {
       
-      console.log(response)
       if (response.includes("successfully")) {
-        console.log("entered success")
         this.modalService.dismissAll();
         this.router.routeReuseStrategy.shouldReuseRoute = () => false; // Reload the route
         this.router.onSameUrlNavigation = 'reload'; // Reload the route

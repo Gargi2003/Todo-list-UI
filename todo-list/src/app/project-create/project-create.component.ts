@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ApiService } from '../services/api-service.service'
 
 @Component({
   selector: 'app-project-create',
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./project-create.component.css']
 })
 export class ProjectCreateComponent {
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private apiService:ApiService) { }
   name = ""
   leader = ""
   key = ""
@@ -35,20 +35,14 @@ export class ProjectCreateComponent {
     "https://i.postimg.cc/r0QK6Syh/ufo-2.png",
     "https://i.postimg.cc/SXLnrBBb/ufo-3.png"
   ];
-  createProject() {
-    const headers = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      }),
-    };
+  ProjectCreate() {
     const proj = {
       name: this.name,
       project_key: this.key,
       leader: this.leader,
       project_avatar: this.getRandomAvatar()
     }
-    this.http.post('http://localhost:8081/projects', proj, headers ).subscribe((response: any) => {
+    this.apiService.createProject(proj).subscribe((response: any) => {
       if (response.includes("successfully")) {
         this.router.navigate(['/view-all-project']);
       }

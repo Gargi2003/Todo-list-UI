@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { CardDetailsComponent } from '../card-details/card-details.component';
-
+import{ApiService} from '../services/api-service.service'
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
@@ -17,8 +17,9 @@ export class TasksComponent {
     this.route.queryParams.subscribe(params => {
       this.projectId = Number(params['projectId']);
     });
-    this.getTaskByProjId();
-    this.getProjName();
+    this.TaskByProjId();
+    this.ProjName();
+    this.listSprint()
   }
   tasks: any;
   status: string[] = [];
@@ -35,8 +36,8 @@ export class TasksComponent {
 
   constructor(
     private modalService: NgbModal,
-    private http: HttpClient,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private apiService: ApiService
   ) { }
 
   openModal(task: any) {
@@ -46,18 +47,11 @@ export class TasksComponent {
     modalRef.componentInstance.projectId= this.projectId
   }
 
-  getTaskByProjId(){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      }),
-    };
-    this.http.get('http://localhost:8081/tasks/getByProjectId?projectId='+this.projectId, httpOptions).subscribe(response => {
+  TaskByProjId(){
+    this.apiService.getTaskByProjId(this.projectId).subscribe(response => {
     this.tasks=response  
     this.tasks.forEach((task: any) => {
         this.status = task.status;
-        console.log(this.status)
         if (this.status.includes('To Do') || this.status.includes('todo')) {
           this.todo.push(task);
         } else if (this.status.includes('In Progress') || this.status.includes('inProgress')) {
@@ -68,39 +62,33 @@ export class TasksComponent {
       });
     });
   }
-  getProjName(){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      }),
-    };
-    
-    this.http.get('http://localhost:8081/projects/get?id='+this.projectId,httpOptions).subscribe(response=>{
+  key:any
+  ProjName(){
+    this.apiService.getProjName(this.projectId).subscribe(response=>{
       this.proj=response
       this.projectName=this.proj.name
+      this.key=this.proj.project_key
     })
   }
-  // getTasksStatus() {
-  //   // Add the userId to the API request headers
-  //   const httpOptions = {
-  //     headers: new HttpHeaders({
-  //       'Content-Type': 'application/json',
-  //       Authorization: `Bearer ${localStorage.getItem('token')}`,
-  //     }),
-  //   };
-  //   this.http.get<any[]>('http://localhost:8081/tasks/list', httpOptions).subscribe(response => {
-  //     this.tasks = response;
-  //     this.tasks.forEach((task: any) => {
-  //       this.status = task.status;
-  //       if (this.status.includes('To Do') || this.status.includes('todo')) {
-  //         this.todo.push(task);
-  //       } else if (this.status.includes('In Progress') || this.status.includes('inProgress')) {
-  //         this.inProgress.push(task);
-  //       } else if (this.status.includes('Done') || this.status.includes('done')) {
-  //         this.done.push(task);
-  //       }
-  //     });
-  //   });
-  // }
+  showDropdown: boolean = false;
+
+  toggleDropdown() {
+    this.showDropdown = !this.showDropdown;
+  }
+
+  TaskBySprint(){
+    this.apiService.getTaskBySprint(this.projectId).subscribe(response=>{
+      this.proj=response
+      this.projectName=this.proj.name
+      this.key=this.proj.project_key
+    })
+  }
+  sprintInfo:any
+  listSprint(){
+    this.apiService.getSprintList().subscribe(response=>{
+      this.sprintInfo=response
+      console.log(this.sprintInfo)
+    })
+  }
+  
 }

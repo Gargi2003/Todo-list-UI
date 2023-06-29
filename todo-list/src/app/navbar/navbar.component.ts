@@ -16,7 +16,6 @@ export class NavbarComponent {
     scrollable: true
   };
   openModal() {
-    // console.log(task);
     const modalRef = this.modalService.open(CreateTasksComponent, this.modalOptions);
   }
 }

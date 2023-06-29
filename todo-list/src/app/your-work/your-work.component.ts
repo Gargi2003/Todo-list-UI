@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import{ApiService} from '../services/api-service.service'
+
 interface MyObject {
   key: string;
   projectName: string;
@@ -13,8 +14,8 @@ interface MyObject {
 })
 export class YourWorkComponent {
   ngOnInit() {
-    this.getProjects();
-    this.getAudit();
+    this.Projects();
+    this.Audit();
   }
 
   getRandomColor() {
@@ -29,21 +30,15 @@ export class YourWorkComponent {
 
   project: any;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private router: Router, private apiService: ApiService
+  ) { }
 
   projectId: any;
   myMap: Map<number, MyObject> = new Map();
-  getProjects() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      }),
-    };
-    this.http.get('http://localhost:8081/projects/list', httpOptions).subscribe(response => {
+  Projects() {
+    this.apiService.getProjects().subscribe(response => {
       this.project = response;
-      console.log(this.project)
-      // console.log(this.project.name)
+
       for (let i = 0; i < this.project.length; i++) {
         this.myMap.set(this.project[i].id, { key: this.project[i].project_key, projectName: this.project[i].name });
       }
@@ -59,15 +54,8 @@ export class YourWorkComponent {
   issueType: any
   projName: any
   key: any
-  getAudit() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      }),
-    };
-
-    this.http.get('http://localhost:8081/audit/list', httpOptions).subscribe(response => {
+  Audit() {
+    this.apiService.getAuditList().subscribe(response => {
       this.audit = response;
       // Group tasks by create date
       const groupedTasks: { [key: string]: any[] } = {};
@@ -97,7 +85,6 @@ export class YourWorkComponent {
           this.tasksByCreateDate.push({ createDate: createDate, label: label, tasks: groupedTasks[createDate] });
         }
       }
-      console.log(groupedTasks)
     });
   }
 

@@ -90,5 +90,5 @@
   <div *ngIf="loading">
     <mat-spinner [diameter]="40"></mat-spinner>
   </div>
-  <button *ngIf="!loading" type="button" class="btn btn-primary"(click)="createTask(selectedProject,selectedIssueType,selectedStatus,summary,description,assigneeSearchTerm,sprint,storyPoints,reporterSearchTerm)">Create</button>
+  <button *ngIf="!loading" type="button" class="btn btn-primary"(click)="TaskCreate(selectedIssueType,selectedStatus,summary,description,assigneeSearchTerm,sprint,storyPoints,reporterSearchTerm)">Create</button>
 </div>

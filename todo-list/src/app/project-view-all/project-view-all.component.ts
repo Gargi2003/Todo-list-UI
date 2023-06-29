@@ -1,6 +1,8 @@
 import { Component,OnInit } from '@angular/core';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+// import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ApiService } from '../services/api-service.service'
+
 interface PagingConfig {
   currentPage: number;
   itemsPerPage: number;
@@ -13,7 +15,7 @@ interface PagingConfig {
 })
 
 export class ProjectViewAllComponent implements OnInit{
-  constructor(private router: Router,private http: HttpClient){
+  constructor(private router: Router,private apiService: ApiService){
     this.pagingConfig = {
       itemsPerPage: this.itemsPerPage,
       currentPage: this.currentPage,
@@ -35,13 +37,7 @@ export class ProjectViewAllComponent implements OnInit{
   page: number = 1;
   project:any
   getProjects(){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      }),
-    };
-    this.http.get('http://localhost:8081/projects/list',httpOptions).subscribe(response=>{
+    this.apiService.getProjects().subscribe(response=>{
       this.project=response
       this.pagingConfig.totalItems = this.project.length;
       this.filteredProjects = this.project;
@@ -67,15 +63,7 @@ export class ProjectViewAllComponent implements OnInit{
     this.searchKeyword=''
   }
   deleteProject(id:any) {
-    console.log("id",id)
-    const headers = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      }),
-    };
-    console.log(id)
-    this.http.delete('http://localhost:8081/projects/delete?id='+id , headers ).subscribe((res: any) => {
+    this.apiService.deleteProject(id).subscribe((res: any) => {
       if (res.includes("Deleted")) {
         this.router.navigate(['/view-all-project']);
         location.reload();

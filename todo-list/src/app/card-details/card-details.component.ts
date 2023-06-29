@@ -1,9 +1,7 @@
 import { Component, Input } from '@angular/core';
-// import * as moment from 'moment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { NavigationExtras } from '@angular/router';
+import { ApiService } from '../services/api-service.service'
 
 @Component({
   selector: 'app-card-details',
@@ -14,80 +12,70 @@ export class CardDetailsComponent {
   selectedTask: any;
   timeDifference: any;
   selectedStatus: string = '';
-  result:any
+  result: any
 
-  constructor(private router: Router,private modalService: NgbModal,private http: HttpClient) { }
+  constructor(private router: Router, private modalService: NgbModal, private apiService: ApiService) { }
   @Input() task: any;
   @Input() projectName: string = '';
-  @Input() projectId:any;
+  @Input() projectId: any;
   ngOnInit() {
     this.selectedStatus = this.task.status;
-    // console.log("status", this.selectedStatus)
   }
 
   onCloseClick() {
-    console.log("projid",this.projectId)
-    this.modalService.dismissAll(); 
-    this.router.navigate(['/tasks'],{ queryParams: { projectId: this.projectId } });
-       
+    this.modalService.dismissAll();
+    this.router.navigate(['/tasks'], { queryParams: { projectId: this.projectId } });
+
   }
   isDropdownOpen = false;
-   httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    }),
-  };
-  
+
   //delete task
   onClickDelete() {
-    this.http.delete('http://localhost:8081/tasks/delete?id='+this.task.id,this.httpOptions).subscribe((response:any) => {
-      // console.log(response)
+    this.apiService.deleteTask(this.task.id).subscribe((response: any) => {
       if (response.includes("Deleted")) {
-        // console.log("entered success")
         this.modalService.dismissAll();
         this.router.routeReuseStrategy.shouldReuseRoute = () => false; // Reload the route
         this.router.onSameUrlNavigation = 'reload'; // Reload the route
-        this.router.navigate(['/tasks'],{ queryParams: { projectId: this.projectId } });
+        this.router.navigate(['/tasks'], { queryParams: { projectId: this.projectId } });
       }
     })
   }
   //update description
   onSaveClickDescription() {
-    const body={
+    const body = {
       description: this.task.description
     }
-    this.http.put('http://localhost:8081/tasks/edit?id='+this.task.id,body,this.httpOptions).subscribe((response:any)=>{
-      if(response.includes("successfully")){
-        //add toaster
-      }
-    })
+    this.apiService.editTask(this.task.id, body)
+      .subscribe((response: any) => {
+        if (response.includes("successfully")) {
+          //add toaster
+        }
+      })
   }
   //update comment
-  onSaveClickComment(){
-    const body={
+  onSaveClickComment() {
+    const body = {
       comments: this.task.comments
     }
-    this.http.put('http://localhost:8081/tasks/edit?id='+this.task.id,body,this.httpOptions).subscribe((response:any)=>{
-      if(response.includes("successfully")){
+    this.apiService.editTask(this.task.id,body)
+    .subscribe((response: any) => {
+      if (response.includes("successfully")) {
         //add toaster
-        console.log("success")
       }
     })
   }
   //update status
-  updateStatus(){
-    console.log(this.selectedStatus)
+  updateStatus() {
     const body = {
       status: this.selectedStatus
     };
-    this.http.put('http://localhost:8081/tasks/edit?id='+this.task.id,body,this.httpOptions).subscribe((response:any)=>{
-      if(response.includes("successfully")){
+    this.apiService.editTask(this.task.id,body)
+    .subscribe((response: any) => {
+      if (response.includes("successfully")) {
         //add toaster
-        console.log("success")
         this.router.routeReuseStrategy.shouldReuseRoute = () => false; // Reload the route
         this.router.onSameUrlNavigation = 'reload'; // Reload the route
-        this.router.navigate(['/tasks'],{ queryParams: { projectId: this.projectId } });
+        this.router.navigate(['/tasks'], { queryParams: { projectId: this.projectId } });
       }
     })
   }
@@ -96,43 +84,40 @@ export class CardDetailsComponent {
     const body = {
       assignee: this.task.assignee
     };
-  
-    this.http.put('http://localhost:8081/tasks/edit?id=' + this.task.id, body, this.httpOptions)
-      .subscribe((response:any) => {
-        
-        if(response.includes("successfully")){
-          console.log("success");
+
+    this.apiService.editTask(this.task.id,body)
+      .subscribe((response: any) => {
+
+        if (response.includes("successfully")) {
         }
         // Handle the response and update the UI if needed
       });
   }
-  
-   //update reporter
-   updateReporter() {
+
+  //update reporter
+  updateReporter() {
     const body = {
       reporter: this.task.reporter
     };
-  
-    this.http.put('http://localhost:8081/tasks/edit?id=' + this.task.id, body, this.httpOptions)
-      .subscribe((response:any) => {
-        
-        if(response.includes("successfully")){
-          console.log("success");
+
+    this.apiService.editTask(this.task.id,body)
+      .subscribe((response: any) => {
+
+        if (response.includes("successfully")) {
         }
         // Handle the response and update the UI if needed
       });
   }
   //update points
-  updatePoints(){
+  updatePoints() {
     const body = {
       points: this.task.points
     };
-  
-    this.http.put('http://localhost:8081/tasks/edit?id=' + this.task.id, body, this.httpOptions)
-      .subscribe((response:any) => {
-        
-        if(response.includes("successfully")){
-          console.log("success");
+
+    this.apiService.editTask(this.task.id,body)
+      .subscribe((response: any) => {
+
+        if (response.includes("successfully")) {
         }
         // Handle the response and update the UI if needed
       });
