@@ -27,7 +27,8 @@ import { MatButtonModule } from '@angular/material/button';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { YourWorkComponent } from './your-work/your-work.component';
-
+import { BacklogComponent } from './backlog/backlog.component';
+import { UserService } from './services/user.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,8 @@ import { YourWorkComponent } from './your-work/your-work.component';
     CreateTasksComponent,
     ProjectCreateComponent,
     ProjectViewAllComponent,
-    YourWorkComponent
+    YourWorkComponent,
+    BacklogComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +61,7 @@ import { YourWorkComponent } from './your-work/your-work.component';
     NgxPaginationModule,
     MatProgressSpinnerModule
   ],
-  providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-US'}],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

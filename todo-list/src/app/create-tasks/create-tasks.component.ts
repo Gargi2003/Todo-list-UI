@@ -19,7 +19,7 @@ export class CreateTasksComponent {
   assigneeSearchTerm: string = '';
   assigneeResults: string[] = []; // Placeholder for assignee search results
   selectedAssignee: string = '';
-  sprint: number=0;
+  selectedSprint: number=0;
   storyPoints: number = 0;
   reporterSearchTerm: string = '';
   reporterResults: string[] = []; // Placeholder for reporter search results
@@ -40,13 +40,27 @@ export class CreateTasksComponent {
     if (selectedProject) {
       this.selectedProject = selectedProject.name; // Update selectedProject to ensure consistency
       this.projId = selectedProject.id;
+      this.GetSprint(this.projId)
     } else {
       return;
     }
   }
-  
+  sprints:any
+  sprintId:any
+  onSprintSelection(){
+    const selectedSprint = this.sprints.find((sprint:any)=> sprint.name === this.selectedSprint);
+    console.log(selectedSprint)
+    this.sprintId=selectedSprint.id
+  }
+ 
+  GetSprint(projId:number){
+    this.apiService.getSprintByProjectId(projId).subscribe(response=>{
+      this.sprints=response
+      console.log(this.sprints)
+    })
+  }
 
-  TaskCreate(selectedIssueType: any, selectedStatus: any, summary: any, description: any, assigneeSearchTerm: any, sprint: number, storyPoints: number, reporterSearchTerm: any) {
+  TaskCreate(selectedIssueType: any, selectedStatus: any, summary: any, description: any, assigneeSearchTerm: any,storyPoints: number, reporterSearchTerm: any) {
     this.loading=true
     const task = {
       title: summary,
@@ -54,11 +68,12 @@ export class CreateTasksComponent {
       status: selectedStatus,
       issue_type: selectedIssueType,
       assignee: assigneeSearchTerm,
-      sprint_id: sprint,
+      sprint_id: this.sprintId,
       project_id:this.projId,
       points: storyPoints,
       reporter: reporterSearchTerm
     };
+    console.log("payload",task)
     this.apiService.createTask(task).subscribe(response => {
       
       if (response.includes("successfully")) {

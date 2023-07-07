@@ -16,11 +16,11 @@
         <a href="#" class="list-group-item list-group-item-action py-2 ripple border-0" aria-current="true">
           <i class="fa fa-tachometer fa-fw me-3"></i><span>Roadmap</span>
         </a>
-        <a href="#" class="list-group-item list-group-item-action py-2 ripple active border-0">
+        <a [routerLink]="['/tasks']" [queryParams]="{ projectId: projectId }" routerLinkActive="active"  class="list-group-item list-group-item-action py-2 ripple border-0">
           <i class="fa fa-map fa-fw me-3" aria-hidden="true"></i>
           <span>Board</span>
         </a>
-        <a href="#" class="list-group-item list-group-item-action py-2 ripple border-0">
+        <a [routerLink]="['/backlog']" [queryParams]="{ projectId: projectId }" routerLinkActive="active"  class="list-group-item list-group-item-action py-2 ripple border-0">
           <i class="fa fa-lock fa-fw me-3"></i><span>Backlog</span>
         </a>
         <!-- DEVELOPMENT -->
@@ -42,6 +42,10 @@
           <i class="fa fa-cog fa-fw me-3"></i><span>Project Settings</span>
         </a>
       </div>
+    </div>
+     <!-- Add router-outlet directive here -->
+     <div class="container pt-4">
+      <router-outlet></router-outlet>
     </div>
   </nav>
   <!-- Sidebar -->

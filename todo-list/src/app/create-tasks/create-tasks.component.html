@@ -62,7 +62,15 @@
   <br>
   <div class="form-group">
     <label for="sprint" style="font-size: 13px;color: gray;">Sprint</label>
-    <input style="width: 350px;background-color: rgb(242, 242, 244);" type="number" class="form-control" id="sprint" [(ngModel)]="sprint">
+    <!-- <input style="width: 350px;background-color: rgb(242, 242, 244);" type="number" class="form-control" id="sprint" [(ngModel)]="sprint"> -->
+
+    <!-- <label for="projectDropdown" style="font-size: 13px;color: gray;">Project</label> -->
+    <select style="width: 350px;background-color: rgb(242, 242, 244);" [(ngModel)]="selectedSprint" class="form-control"  (change)="onSprintSelection()">
+      <option *ngFor="let sprint of sprints" [value]="sprint.name">
+        {{ sprint.name }}
+      </option>
+    </select>
+
   </div>
   <br>
   <div class="form-group">
@@ -90,5 +98,5 @@
   <div *ngIf="loading">
     <mat-spinner [diameter]="40"></mat-spinner>
   </div>
-  <button *ngIf="!loading" type="button" class="btn btn-primary"(click)="TaskCreate(selectedIssueType,selectedStatus,summary,description,assigneeSearchTerm,sprint,storyPoints,reporterSearchTerm)">Create</button>
+  <button *ngIf="!loading" type="button" class="btn btn-primary"(click)="TaskCreate(selectedIssueType,selectedStatus,summary,description,assigneeSearchTerm,storyPoints,reporterSearchTerm)">Create</button>
 </div>

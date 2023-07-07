@@ -1,0 +1,49 @@
+
+.dropdown-menu {
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    display: none;
+  }
+  
+  .dropdown-menu {
+    display: block;
+  }
+  
+  .dropdown-item {
+    display: block;
+    padding: 0.5rem 1rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+  }
+  .dropdown-item:hover{
+    background-color: rgb(224, 223, 223)
+  }
+
+  
+.icon-ellipsis {
+    background-color: rgb(224, 223, 223);
+    padding: 10px;
+    height: 35px;
+  }
+  
+  .icon-ellipsis i {
+    position: relative;
+    top: -5px;
+  }
+  
+  .icon-ellipsis i :hover {
+    cursor: pointer;
+  }
+  
+  .icon-ellipsis:hover {
+    cursor: pointer;
+    background-color: rgb(185, 182, 182);
+  }
+  

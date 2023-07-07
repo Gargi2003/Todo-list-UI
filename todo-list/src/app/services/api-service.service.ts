@@ -26,10 +26,15 @@ export class ApiService {
   getProjName(projectId: number): Observable<any> {
     return this.http.get('http://localhost:8081/projects/get?id=' + projectId, this.httpOptions)
   }
-  getTaskBySprint(sprintId: number, projectId: number): Observable<any> {
+  getTaskBySprintAndProject(sprintId: number, projectId: number): Observable<any> {
     return this.http.get('http://localhost:8081/tasks/getBySprintId?sprintId=' + sprintId + '&projectId=' + projectId, this.httpOptions);
   }
-  
+  getSprintByProjectId(projectId: number): Observable<any> {
+    return this.http.get('http://localhost:8081/sprints/getByProjectId?id=' + projectId, this.httpOptions);
+  }
+  getSprintByProjectName(project_name:string): Observable<any> {
+    return this.http.get('http://localhost:8081/sprints/getByProjectName?project_name=' + project_name, this.httpOptions);
+  }
   getSprintList(): Observable<any> {
     return this.http.get('http://localhost:8081/sprints/list', this.httpOptions)
   }
@@ -38,6 +43,9 @@ export class ApiService {
   }
   getProjects(): Observable<any> {
     return this.http.get('http://localhost:8081/projects/list', this.httpOptions)
+  }
+  getUsers():Observable<any>{
+    return this.http.get('http://localhost:8080/users',this.httpOptions);
   }
 
   //delete apis
@@ -57,6 +65,9 @@ export class ApiService {
   }
   loginUser(payload: any): Observable<any> {
     return this.http.post<any>('http://localhost:8080/users/login', payload)
+  }
+  signupUser(payload:any):Observable<any>{
+    return this.http.post<any>('http://localhost:8080/users/signup',payload,this.httpOptions)
   }
   //put apis
   editTask(id: any, body: any): Observable<any> {

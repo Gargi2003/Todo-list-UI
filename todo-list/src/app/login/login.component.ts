@@ -12,9 +12,6 @@ import { ApiService } from '../services/api-service.service'
 export class LoginComponent {
   constructor(private router: Router, private http: HttpClient,private apiService: ApiService) { }
 
-  navigateToSignup() {
-    this.router.navigate(['/signup']);
-  }
 
   login(username: string, password: string) {
     const payload = {

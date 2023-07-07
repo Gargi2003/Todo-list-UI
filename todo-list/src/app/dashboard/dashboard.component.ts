@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {  ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api-service.service'
+import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 // import { Chart, registerables } from 'chart.js';
 // Chart.register(...registerables);
@@ -15,7 +17,17 @@ interface PagingConfig {
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  constructor(private route: ActivatedRoute, private apiService: ApiService) {
+  introCompressed: boolean = false;
+  compressIntro() {
+    this.introCompressed = true;
+    // Logic to collapse the section below the introduction
+  }
+
+  expandIntro() {
+    this.introCompressed = false;
+    // Logic to expand the section below the introduction
+  }
+  constructor(private route: ActivatedRoute, private apiService: ApiService,private router: Router,private userService: UserService) {
     this.pagingConfig = {
       itemsPerPage: this.itemsPerPage,
       currentPage: this.currentPage,
@@ -67,5 +79,8 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-
+  navigateToTasks(projectId: number) {
+    this.router.navigate(['/tasks'], { queryParams: { projectId: projectId } });
+  }
+ 
 }

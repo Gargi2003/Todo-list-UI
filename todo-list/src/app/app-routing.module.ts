@@ -10,12 +10,13 @@ import { ProjectCreateComponent } from './project-create/project-create.componen
 import { ProjectViewAllComponent } from './project-view-all/project-view-all.component';
 import { YourWorkComponent } from './your-work/your-work.component';
 import { CreateTasksComponent } from './create-tasks/create-tasks.component';
+import { BacklogComponent } from './backlog/backlog.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'create-tasks', component: CreateTasksComponent, canActivate: [AuthGuard] },
-
+  { path: 'backlog', component: BacklogComponent, canActivate: [AuthGuard] },
   { path: 'work', component: YourWorkComponent, canActivate: [AuthGuard] },
   { path: 'tasks', component: TasksComponent, canActivate: [AuthGuard] },
   { path: 'create-project', component: ProjectCreateComponent, canActivate: [AuthGuard] },

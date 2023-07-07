@@ -40,7 +40,7 @@
                   Get started in backlog.</p>
                 <p style="margin-left: 10%;">Plan and start a sprint to see </p>
                 <p style="margin-top: -20px;margin-left: 30%;"> issues here</p>
-                <button class="btn btn-secondary btn-sm" style="width: 140px;
+                <button [routerLink]="['/backlog']" [queryParams]="{ projectId: projectId ,currentSprintId: currentSprint?.id  }" class="btn btn-secondary btn-sm" style="width: 140px;
                 margin-left: 75px;">Go to Backlog</button>
               </div>
               <div class="row " *ngFor="let item of todo">

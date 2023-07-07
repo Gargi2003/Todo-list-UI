@@ -1,7 +1,19 @@
-.divider:after,
-.divider:before {
-content: "";
-flex: 1;
-height: 1px;
-background: #eee;
+
+.register{
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 13px;
+}
+.register:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.bullet {
+    margin: 0 8px;
+    color: rgb(105, 105, 105);
+}
+.outer-body{
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+
 }

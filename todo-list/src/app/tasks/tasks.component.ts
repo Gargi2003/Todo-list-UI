@@ -20,6 +20,7 @@ export class TasksComponent {
     this.ProjName();
     this.listSprint();
   }
+  userId:any
   tasks: any;
   status: string[] = [];
   todo: any[] = [];
@@ -47,7 +48,7 @@ export class TasksComponent {
   }
 
   TaskBySprintIdAndProjectId(sprint_id:number,project_id:number) {
-    this.apiService.getTaskBySprint(sprint_id, project_id).subscribe(response => {
+    this.apiService.getTaskBySprintAndProject(sprint_id, project_id).subscribe(response => {
       this.tasks = response
       console.log("tasksbysprintproj",this.tasks)
       this.tasks.forEach((task: any) => {
@@ -76,20 +77,16 @@ export class TasksComponent {
     this.showDropdown = !this.showDropdown;
   }
 
-
   sprintInfo: any
   currentSprint: any
   listSprint() {
     this.apiService.getSprintList().subscribe(response => {
       this.sprintInfo = response;
-      console.log(this.sprintInfo);
-      console.log(this.projectId);
   
       // Filter sprints based on projectId
       const filteredSprints = this.sprintInfo.filter((sprint:any) => sprint.project_id === this.projectId);
   
       for (let j = 0; j < filteredSprints.length; j++) {
-        console.log("entered if",filteredSprints);
         // Find the current sprint
         const currentDate = new Date();
         let closestEndDate = new Date(filteredSprints[0].end_date); // Assuming the first sprint is the closest initially

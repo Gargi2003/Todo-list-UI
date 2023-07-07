@@ -6,15 +6,20 @@
             <div class="card card-head">
                 <div class="row no-gutters">
                     <p class="card-title mt-2" style="margin-left: 20px; font-size: 15px; font-weight: 500;">
-                        Introduction</p>
-                    <div class="col-md-4">
+                        Introduction
+                        <span>
+                            <i class="fa fa-compress" aria-hidden="true" (click)="compressIntro()" [hidden]="introCompressed" style="margin-left: 750px;"></i>
+                            <i class="fa fa-expand" aria-hidden="true" (click)="expandIntro()" [hidden]="!introCompressed" style="margin-left: 750px;"></i>
+                        </span>
+                    </p>
+                    <div  class="col-md-4">
                         <img class="card-img" src="../../assets/welcome-jira.jpg" alt="Card image cap">
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-8"  >
                         <div class="card-body">
-                            <p style="font-size: larger;font-weight: 500;">Welcome to Task Ninja</p>
+                            <p style="font-size: larger;font-weight: 500;">Welcome to TaskNinja</p>
                             <p class="card-text" style="font-size: 15px;font-weight: 400;"> Not sure where to start?
-                                Checkout the Task Ninja 101 guide and Atlassian training course. <br><br> You can
+                                Checkout the TaskNinja 101 guide and Agileware training course. <br><br> You can
                                 customize this text in the Administration section.</p>
                         </div>
                     </div>
@@ -26,7 +31,7 @@
                 <p class="card-title mt-2" style="margin-left: 20px; font-size: 15px; font-weight: 500;">Assigned to Me
                 </p>
                 <br>
-                <div class="container"style="max-height: 200px; overflow-y: auto;">
+                <div class="container" style="max-height: 200px; overflow-y: auto;">
                     <table class="table table-sm">
                         <thead style="position: sticky;top:0;background-color: white;">
                             <tr class="table-header">
@@ -58,15 +63,19 @@
                     <div *ngFor="let item of filteredProjects | paginate : pagingConfig; let i = index"
                         style="background-color: var(--ds-background-neutral, #f5f5f5);">
                         <div class="d-flex p-2">
-                            <img height="30px" width="30px" [src]="item.project_avatar ? item.project_avatar : 'https://i.postimg.cc/tRVRnW40/people-2.png'" alt="">
-                            <p class="proj-text" style="font-size: 15px;font-weight: 500;color:#3b73af"> {{item.name}} <span
-                                    style="color:black;font-weight: 400">( {{item.project_key}} )</span></p>
+                            <img height="30px" width="30px"
+                                [src]="item.project_avatar ? item.project_avatar : 'https://i.postimg.cc/tRVRnW40/people-2.png'"
+                                alt="">
+                            <p (click)="navigateToTasks(item.id)" class="proj-text"
+                                style="font-size: 15px;font-weight: 500;color:#3b73af;cursor: pointer;"> {{item.name}}
+                                <span style="color:black;font-weight: 400">( {{item.project_key}} )</span>
+                            </p>
                         </div>
                         <p class="lead-text" style="font-size: 13px; font-weight: bold; margin-right: 5px;">Lead: <span
                                 class="p-4" style="font-weight: 400;color: #3b73af;">{{item.leader}}</span></p>
                     </div>
                 </div>
-                <pagination-controls  previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+                <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
                 </pagination-controls>
             </div>
         </div>

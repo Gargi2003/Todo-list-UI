@@ -1,0 +1,40 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="row">
+    <div class="col col-2">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col col-8">
+      <div class="row d-flex">
+        <ol style="font-size: 14px;margin-top: 10px;" class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Projects</a></li>
+          <li class="breadcrumb-item active" aria-current="page">projectName</li>
+        </ol>
+
+        <h5 >Backlog</h5>
+        <div class="col d-flex" style="justify-content: space-between;">
+          <form class="d-flex my-2 my-lg-0">
+            <input class="form-control mr-sm-2 me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-primary me-2" type="submit">
+              <i class="fa fa-search"></i>
+            </button>
+            <button class="btn btn-outline-primary me-2" type="submit" style="border-radius: 50%;">
+              <i class="fa fa-user"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+      <br>
+    </div>
+    <div class="col col-2">
+      <div class="d-flex" style="margin-top: 68.5px;">
+        <div class="icon-ellipsis" (click)="toggleDropdown()">
+          <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+          <div class="dropdown-menu" *ngIf="showDropdown">
+            <a class="dropdown-item" href="#">Manage custom filters</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

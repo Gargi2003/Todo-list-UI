@@ -1,31 +1,42 @@
-<section class="vh-100">
-    <div class="container py-5 h-100">
-      <div class="row d-flex align-items-center justify-content-center h-100">
-        <div class="col-md-8 col-lg-7 col-xl-6">
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
-            class="img-fluid" alt="Phone image">
-        </div>
-        <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-          <form (ngSubmit)="login(form1Example13.value,form1Example23.value)" #loginForm="ngForm">
-            <!-- Email input -->
-            <div class="form-outline mb-4">
-              <input type="text" id="form1Example13" #form1Example13 class="form-control form-control-lg" placeholder="email"/>
-            </div>
-  
-            <!-- Password input -->
-            <div class="form-outline mb-4">
-              <input type="password" id="form1Example23" #form1Example23 class="form-control form-control-lg" placeholder="password"/>
-            </div>
+<!-- login.component.html -->
 
-            <!-- Submit button -->
-            <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
-  
-            <div class="divider d-flex align-items-center my-4">
-              <p class="text-center fw-bold mx-3 mb-0 text-muted">Dont have an account?</p>
-              <a (click)="navigateToSignup()"><button class="btn btn-secondary">Register</button></a>
+<div class="container">
+  <div class="row justify-content-center align-items-center" style="height: 100vh;">
+    <div class="col-md-6">
+      <div class="card mt-5 text-center">
+        <div class="card-body outer-body">
+          <img src="../../assets/logo.jpg" class="mb-4">
+          <h6 class="mb-4">Log in to continue</h6>
+          <form (ngSubmit)="login(form1Example13.value, form1Example23.value)" #loginForm="ngForm">
+            <div class="form-group">
+              <!-- <label for="form1Example13">Email</label> -->
+              <input type="text" id="form1Example13" #form1Example13 class="form-control mx-auto"
+                placeholder="Enter your email" required style="width: 300px;">
+            </div>
+            <br>
+            <div class="form-group">
+              <!-- <label for="form1Example23">Password</label> -->
+              <input type="password" id="form1Example23" #form1Example23 class="form-control mx-auto"
+                placeholder="Enter your password" required style="width: 300px;">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+           
+            <div class="text-center mt-3">
+              <a class="register">Can't Login? </a>
+              <span class="bullet">&bull;
+              </span>
+              <a class="register" [routerLink]="['/signup']">Create an account</a>
             </div>
           </form>
         </div>
       </div>
+      <!-- Left Image -->
+      <img src="../../assets/left-login.png" class="img-fluid position-absolute bottom-0 start-0" alt="Image 1">
+
+      <!-- Right Image -->
+      <img src="../../assets/right-login.png" class="img-fluid position-absolute bottom-0 end-0" alt="Image 2">
+
     </div>
-  </section>
+  </div>
+</div>

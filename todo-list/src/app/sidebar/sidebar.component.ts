@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api-service.service'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,9 +9,13 @@ import { ApiService } from '../services/api-service.service'
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
+  @Input() projectIds: number | undefined;
+
   constructor(
+    private router: Router,
     private route: ActivatedRoute, private apiService: ApiService) { }
   projectId: any;
+
   proj: any
   projectName: string = ""
   ngOnInit() {
@@ -26,5 +31,8 @@ export class SidebarComponent {
       this.projectName = this.proj.name
       this.projUrl = this.proj.project_avatar
     })
+  }
+  navigateToTasks() {
+    this.router.navigate(['/tasks'], { queryParams: { projectId: this.proj.id } });
   }
 }
