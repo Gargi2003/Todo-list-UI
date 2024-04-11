@@ -28,7 +28,6 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { YourWorkComponent } from './your-work/your-work.component';
 import { BacklogComponent } from './backlog/backlog.component';
-import { UserService } from './services/user.service';
 @NgModule({
   declarations: [
     AppComponent,

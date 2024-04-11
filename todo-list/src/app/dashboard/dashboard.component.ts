@@ -18,15 +18,15 @@ interface PagingConfig {
 })
 export class DashboardComponent implements OnInit {
   introCompressed: boolean = false;
-  compressIntro() {
-    this.introCompressed = true;
-    // Logic to collapse the section below the introduction
-  }
+  // compressIntro() {
+  //   this.introCompressed = true;
+  //   // Logic to collapse the section below the introduction
+  // }
 
-  expandIntro() {
-    this.introCompressed = false;
-    // Logic to expand the section below the introduction
-  }
+  // expandIntro() {
+  //   this.introCompressed = false;
+  //   // Logic to expand the section below the introduction
+  // }
   constructor(private route: ActivatedRoute, private apiService: ApiService,private router: Router,private userService: UserService) {
     this.pagingConfig = {
       itemsPerPage: this.itemsPerPage,

@@ -4,7 +4,8 @@
 <div class="modal-body">
   <div class="form-group">
     <label for="projectDropdown" style="font-size: 13px;color: gray;">Project</label>
-    <select style="width: 350px;background-color: rgb(242, 242, 244);" [(ngModel)]="selectedProject" class="form-control" (change)="onProjectSelection()">
+    <select style="width: 350px;background-color: rgb(242, 242, 244);" [(ngModel)]="selectedProject"
+      class="form-control" (change)="onProjectSelection()">
       <option *ngFor="let project of projects" [value]="project.name">
         {{ project.name }}
       </option>
@@ -13,7 +14,8 @@
   <br>
   <div class="form-group">
     <label for="issueTypeDropdown" style="font-size: 13px;color: gray;">Issue Type</label>
-    <select style="width: 350px; background-color: rgb(242, 242, 244);" class="form-control" id="issueTypeDropdown" [(ngModel)]="selectedIssueType">
+    <select style="width: 350px; background-color: rgb(242, 242, 244);" class="form-control" id="issueTypeDropdown"
+      [(ngModel)]="selectedIssueType">
       <option value="task">Task</option>
       <option value="bug">Bug</option>
       <option value="epic">Epic</option>
@@ -27,7 +29,8 @@
   <br>
   <div class="form-group">
     <label for="statusDropdown" style="font-size: 13px;color: gray;">Status</label>
-    <select style="width: 200px;background-color: rgb(242, 242, 244);" class="form-control" id="statusDropdown" [(ngModel)]="selectedStatus">
+    <select style="width: 200px;background-color: rgb(242, 242, 244);" class="form-control" id="statusDropdown"
+      [(ngModel)]="selectedStatus">
       <option value="To Do">To Do</option>
       <option value="In Progress">In Progress</option>
       <option value="Done">Done</option>
@@ -49,9 +52,10 @@
   <div class="form-group">
     <label style="font-size: 13px;color: gray;">Assignee</label>
     <div class="assignee-search-box">
-      <input style="width: 350px;" type="text" class="form-control" [(ngModel)]="assigneeSearchTerm" placeholder="Search Assignee" (input)="searchAssignee()">
+      <input style="width: 350px;" type="text" class="form-control" [(ngModel)]="assigneeSearchTerm"
+        placeholder="Search Assignee" (input)="searchAssignee()">
       <!-- Implement search functionality for assignee -->
-      <div class="search-results">
+      <div class="search-results-assignee">
         <ul>
           <li *ngFor="let result of assigneeResults" (click)="selectAssignee(result)">{{ result }}</li>
         </ul>
@@ -65,7 +69,8 @@
     <!-- <input style="width: 350px;background-color: rgb(242, 242, 244);" type="number" class="form-control" id="sprint" [(ngModel)]="sprint"> -->
 
     <!-- <label for="projectDropdown" style="font-size: 13px;color: gray;">Project</label> -->
-    <select style="width: 350px;background-color: rgb(242, 242, 244);" [(ngModel)]="selectedSprint" class="form-control"  (change)="onSprintSelection()">
+    <select style="width: 350px;background-color: rgb(242, 242, 244);" [(ngModel)]="selectedSprint" class="form-control"
+      (change)="onSprintSelection()">
       <option *ngFor="let sprint of sprints" [value]="sprint.name">
         {{ sprint.name }}
       </option>
@@ -75,21 +80,21 @@
   <br>
   <div class="form-group">
     <label for="storyPoints" style="font-size: 13px;color: gray;">Story Points Estimate</label>
-    <input style="width: 350px;background-color: rgb(242, 242, 244);" type="number" class="form-control" id="storyPoints" [(ngModel)]="storyPoints">
+    <input style="width: 350px;background-color: rgb(242, 242, 244);" type="number" class="form-control"
+      id="storyPoints" [(ngModel)]="storyPoints">
   </div>
   <br>
   <div class="form-group">
     <label style="font-size: 13px;color: gray;">Reporter</label>
     <div class="reporter-search-box">
-      <input style="width: 350px;" type="text" class="form-control" [(ngModel)]="reporterSearchTerm" placeholder="Search Reporter" (input)="searchReporter()">
-      <!-- Implement search functionality for reporter -->
-      <div class="search-results">
+      <input style="width: 350px;" type="text" class="form-control" [(ngModel)]="reporterSearchTerm"
+        placeholder="Search Reporter" (input)="searchReporter()">
+      <div class="search-results" *ngIf="searchresults">
         <ul>
           <li *ngFor="let result of reporterResults" (click)="selectReporter(result)">{{ result }}</li>
         </ul>
       </div>
     </div>
-    <div class="selected-reporter">{{ selectedReporter }}</div>
   </div>
   <br>
 </div>
@@ -98,5 +103,6 @@
   <div *ngIf="loading">
     <mat-spinner [diameter]="40"></mat-spinner>
   </div>
-  <button *ngIf="!loading" type="button" class="btn btn-primary"(click)="TaskCreate(selectedIssueType,selectedStatus,summary,description,assigneeSearchTerm,storyPoints,reporterSearchTerm)">Create</button>
+  <button *ngIf="!loading" type="button" class="btn btn-primary"
+    (click)="TaskCreate(selectedIssueType,selectedStatus,summary,description,assigneeSearchTerm,storyPoints,reporterSearchTerm)">Create</button>
 </div>

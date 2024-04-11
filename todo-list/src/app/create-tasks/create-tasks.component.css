@@ -22,9 +22,18 @@
     padding: 0;
     margin: 0;
   }
+  .search-results li:hover{
+    background-color: aliceblue;
+  }
   
   .search-results li {
     cursor: pointer;
+    padding: 10px;
+    overflow: auto;
   }
   
- 
+ .search-results{
+  width: 350px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  overflow: auto;
+ }

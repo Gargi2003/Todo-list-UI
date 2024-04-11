@@ -33,6 +33,7 @@ export class CreateTasksComponent {
   Projects() {
     this.apiService.getProjects().subscribe(response => {
       this.projects = response
+      console.log(this.projects)
     });
   }
   onProjectSelection() {
@@ -96,14 +97,32 @@ export class CreateTasksComponent {
     this.selectedAssignee = assignee;
   }
 
-  searchReporter() {
-    // Implement search functionality for reporter
-    // Call backend API (e.g., localhost:8080/getUsers) with the search term reporterSearchTerm
-    // Update reporterResults with the search results
-  }
 
-  selectReporter(reporter: string) {
+  
+  searchReporter() {
+    this.searchresults=true
+    if (this.reporterSearchTerm.trim() !== '') {
+      this.apiService.getUsers().subscribe(users => {
+        this.reporterResults = users
+          .filter((user: any) =>
+            user.username.toLowerCase().includes(this.reporterSearchTerm.toLowerCase())
+          )
+          .map((user: any) => user.username);
+      });
+    } else {
+      this.reporterResults = [];
+    }
+
+    if(this.reporterSearchTerm==''){
+      this.searchresults=false
+    }
+  }
+  searchresults=false
+  selectReporter(reporter: any) {
     this.selectedReporter = reporter;
+    this.reporterSearchTerm = reporter;
+    this.reporterResults = [];
+    this.searchresults=false
   }
 
   cancel() {
